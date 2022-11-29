@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class Users::RegistrationsController < Devise::RegistrationsController
   respond_to :json
   # before_action :configure_sign_up_params, only: [:create]
@@ -6,12 +7,19 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     user = User.new(user_params)
     if user.save
-      render json: { message: user }
+      render json: user
     else
-      render json: { errors: { "email or password" => ["is invalid"] } }, status: :unprocessable_entity
+      render json: {errors: {"email or password" => ["is invalid"]}}, status: :unprocessable_entity
     end
   end
+
+  def show
+    users = User.all
+    render json: users
+  end
+
   private
+
   def user_params
     params.require(:user).permit(:email, :password)
   end
