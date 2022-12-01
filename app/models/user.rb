@@ -9,6 +9,6 @@ class User < ApplicationRecord
   end
 
   def jwt_payload
-    super.merge("foo" => "bar")
+    super.merge("email" => email)
   end
 end

@@ -10,8 +10,6 @@ class Api::SessionsController < Devise::SessionsController
       render status: 406, json: {message: "JSON requests only."} and return
     end
     # auth_options should have `scope: :api_user`
-    pp(auth_options, "00000")
-    pp(params, "llll")
 
     resource = warden.authenticate!(auth_options)
     if resource.blank?
