@@ -55,8 +55,13 @@ group :development, :test do
   gem "rspec"
   gem "rspec-rails"
   gem "byebug", platform: :mri
+  gem "warden-jwt_auth"
+  gem "devise"
+  gem "devise-jwt"
+  gem "devise_token_auth"
+  # authorization
+  gem "jwt"
   gem "capybara"
-  gem "database_cleaner"
   gem "rails-controller-testing"
 end
 
