@@ -22,9 +22,7 @@ describe Users::SessionsController do
   context "when params are correct" do
     subject { post(:create, params: {user: {email: "some@example.com", password: "AaBbCcDd"}}, format: :json) }
 
-    it "has status 200" do
-      expect(subject).to have_http_status(200)
-    end
+    it { expect(subject).to have_http_status(200) }
 
     it "returns JTW token in response body" do
       expect(JSON[subject.body]["jwt"]).to be_present
