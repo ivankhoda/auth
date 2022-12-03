@@ -26,9 +26,25 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   # DELETE /resource/sign_out
-  # def destroy
-  #   super
-  # end
+  def destroy
+    r = "Successfully signed out."
+
+    if warden.authenticated?(auth_options)
+      sign_out
+    else
+      r = "You are not authorized."
+    end
+
+    render json: {message: r}
+
+    # super
+    # pp(Devise.sign_out_all_scopes, "sign out from all scopes")
+    # pp(sign_out, "sign out from")
+    # pp(resource_name, "kkkk")
+    # pp(sign_out(resource_name), "oooooo")
+    # signed_out = (Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name))
+    # pp(signed_out, "00000")
+  end
 
   # protected
 
