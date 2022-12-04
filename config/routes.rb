@@ -3,7 +3,9 @@ Rails.application.routes.draw do
     path_names: {
       sign_in: "login",
       sign_out: "logout",
-      registration: "user"
+      registration: "user",
+      edit: "user"
+
     },
     controllers: {
       sessions: "users/sessions",
@@ -11,6 +13,7 @@ Rails.application.routes.draw do
     }
   devise_scope :user do
     # get "sign_in", to: "devise/sessions#new"
+    patch "update_password", to: "users/passwords#update"
     get "register", to: "devise/registrations#new"
     post "register", to: "devise/registrations#create"
     delete "sign_out", to: "devise/sessions#destroy"

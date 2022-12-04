@@ -3,7 +3,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   respond_to :json
   # before_action :configure_sign_up_params, only: [:create]
-  # before_action :configure_account_update_params, only: [:update]
+
   def create
     user = User.new(user_params)
     if user.save
@@ -13,16 +13,40 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
-  def show
-    users = User.all
-    render json: users
+  # Patch /resource/edit
+  def update
+    if resource.update_without_password(account_update_params)
+      render json: resource
+    else
+      render json: {errors: resource.errors}
+    end
+  end
+
+  protected
+
+  def resource
+    self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
+  end
+
+  def update_parameters
+    parameters = %i[email password]
+    devise_parameter_sanitizer.permit(:user, keys: parameters)
+  end
+
+  def update_password_params
+    params.require(:user).permit(:password, :password_confirmation)
   end
 
   private
 
-  def user_params
-    params.require(:user).permit(:email, :password)
+  def current_token
+    request.env["warden-jwt_auth.token"]
   end
+
+  def user_params
+    params.require(:user).permit(:emails, :password)
+  end
+
   # GET /resource/sign_up
   # def new
   #   super
@@ -30,11 +54,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   # def create
-  #   super
-  # end
-
-  # GET /resource/edit
-  # def edit
   #   super
   # end
 

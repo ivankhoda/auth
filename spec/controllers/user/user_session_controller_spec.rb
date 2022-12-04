@@ -26,6 +26,7 @@ describe Users::SessionsController do
 
       it "returns JTW token in response body" do
         expect(JSON[subject.body]["jwt"]).to be_present
+        expect(subject.headers["jwt"]).to be_present
       end
 
       it "returns valid JWT token" do
