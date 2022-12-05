@@ -20,16 +20,15 @@ class ApplicationController < ActionController::Base
 
   def invalid_auth_token
     respond_to do |format|
-      format.html {
-        redirect_to sign_in_path,
-          error: "Login invalid or expired"
-      }
       format.json { head 401 }
     end
   end
 
   def set_current_user
     @current_user ||= warden.authenticate(scope: :api_user)
+  end
+
+  def current_user
   end
 
   protected
@@ -39,6 +38,17 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_in, keys: [:api_user, :email, :password])
     devise_parameter_sanitizer.permit(:sign_up, keys: [:user, :email, :password])
     devise_parameter_sanitizer.permit(:login, keys: [:user, :email, :password])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:username])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:emails])
   end
+
+  private
+
+  # def current_user
+  #   if @current_user ||= User.find_by(id:
+  #                                       Auth.decode(request.env["HTTP_AUTHORIZATION"])["user"])
+  #     response.headers["jwt"] = Auth.encode({user: @current_user.id})
+  #   else
+  #     render json: {error: {message: ["You must have a valid token"]}}
+  #   end
+  # end
 end

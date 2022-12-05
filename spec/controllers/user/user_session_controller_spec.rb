@@ -18,28 +18,38 @@ describe Users::SessionsController do
       }
     }
   end
+  describe "login" do
+    context "when params are correct" do
+      subject { post(:create, params: {user: {email: "some@example.com", password: "AaBbCcDd"}}, format: :json) }
 
-  context "when params are correct" do
-    subject { post(:create, params: {user: {email: "some@example.com", password: "AaBbCcDd"}}, format: :json) }
+      it { expect(subject).to have_http_status(200) }
 
-    it { expect(subject).to have_http_status(200) }
+      it "returns JTW token in response body" do
+        expect(JSON[subject.body]["jwt"]).to be_present
+        expect(subject.headers["jwt"]).to be_present
+      end
 
-    it "returns JTW token in response body" do
-      expect(JSON[subject.body]["jwt"]).to be_present
+      it "returns valid JWT token" do
+        decoded_token = JWT.decode(JSON[subject.body]["jwt"], Rails.application.secret_key_base, true)
+        expect(decoded_token).to be_present
+      end
     end
 
-    it "returns valid JWT token" do
-      decoded_token = JWT.decode(JSON[subject.body]["jwt"], Rails.application.secret_key_base, true)
-      expect(decoded_token).to be_present
+    context "when login params are incorrect" do
+      subject { post(:create, params: {user: {email: "not_exists@example.com", password: "AaBbCcDd"}}, format: :json) }
+
+      it "returns unathorized status" do
+        expect(subject.status).to eq 401
+      end
     end
   end
 
-  context "when login params are incorrect" do
-    subject { post(:create, params: {user: {email: "not_exists@example.com", password: "AaBbCcDd"}}, format: :json) }
-
-    it "returns unathorized status" do
-      expect(subject.status).to eq 401
+  describe "logout" do
+    before do
+      sign_in(user)
     end
+    subject { delete(:destroy) }
+    it { pp(subject) }
   end
 end
 
