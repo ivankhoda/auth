@@ -11,18 +11,23 @@ class Users::PasswordsController < Devise::PasswordsController
   end
 
   def edit
+    super
+    # super
+    # render json: {password: "changed"}
   end
 
   def update
-    pp(resource, "0000")
-    # self.resource = resource_class.update(resource_params)
-    # yield resource if block_given?
-    #
-    # if resource.errors.empty?
-    #   render json: {success: true}
-    # else
-    #   respond_with resource
-    # end
+    super
+    # pp(resource_params, "resurs params")
+    # self.resource = resource_class.reset_password_by_token(resource_params)
+    # pp(resource, "0000")
+    # # yield resource if block_given?
+    # #
+    # # if resource.errors.empty?
+    # #   render json: {success: true}
+    # # else
+    # #   respond_with resource
+    # # end
   end
 
   private

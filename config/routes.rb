@@ -9,11 +9,12 @@ Rails.application.routes.draw do
     },
     controllers: {
       sessions: "users/sessions",
-      registrations: "users/registrations"
+      registrations: "users/registrations",
+      passwords: "users/passwords"
     }
   devise_scope :user do
     # get "sign_in", to: "devise/sessions#new"
-    patch "update_password", to: "users/passwords#update"
+    # patch "update_password", to: "users/passwords#edit"
     get "register", to: "devise/registrations#new"
     post "register", to: "devise/registrations#create"
     delete "sign_out", to: "devise/sessions#destroy"
