@@ -63,6 +63,7 @@ group :development, :test do
   gem "jwt"
   gem "capybara"
   gem "rails-controller-testing"
+  gem "pry"
 end
 
 group :development do
