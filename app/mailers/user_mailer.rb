@@ -3,17 +3,14 @@
 class UserMailer < Devise::Mailer
   include Devise::Controllers::UrlHelpers
   default template_path: "users/mailer"
+  # layout "users/mailer/welcome_reset_password_instructions"
+  # layout "welcome_reset_password_instructions"
+  layout "mailer"
+  def welcome_reset_password_instructions(user, token)
+    # create_reset_password_token(user)
 
-  def welcome_reset_password_instructions(user)
-    create_reset_password_token(user)
-    mail(to: user.email, subject: "Welcome to the New Site")
-  end
-
-  def create_reset_password_token(user)
-    raw, hashed = Devise.token_generator.generate(User, :reset_password_token)
-    @token = raw
-    user.reset_password_token = hashed
-    user.reset_password_sent_at = Time.now.utc
-    user.save
+    @token = token
+    # send_devise_notification(:unlock_instructions, token)
+    # mail(to: user.email, subject: "Welcome to the New Site")
   end
 end

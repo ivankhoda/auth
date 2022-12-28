@@ -9,7 +9,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if user.save
       render json: user
     else
-      render json: {errors: {"email or password" => ["is invalid"]}}, status: :unprocessable_entity
+      render json: {errors: user.errors}, status: :unprocessable_entity
     end
   end
 
@@ -44,7 +44,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def user_params
-    params.require(:user).permit(:emails, :password)
+    params.require(:user).permit(:email, :password)
   end
 
   # GET /resource/sign_up
