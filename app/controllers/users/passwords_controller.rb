@@ -12,7 +12,6 @@ class Users::PasswordsController < Devise::PasswordsController
   def create
     self.resource = resource_class.send_reset_password_instructions(resource_params)
     yield resource if block_given?
-
     render json: {success: true, text: "Check your email", reset_password_token: resource.token}
   end
 
@@ -25,8 +24,6 @@ class Users::PasswordsController < Devise::PasswordsController
   end
 
   def update
-    pp(resource_params, "resource params")
-    pp(params, "params")
     self.resource = resource_class.reset_password_by_token(resource_params)
     yield resource if block_given?
 

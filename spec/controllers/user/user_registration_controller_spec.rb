@@ -16,10 +16,7 @@ describe Users::RegistrationsController do
   context "#login" do
     let(:user) { create(:user) }
     subject { get(:index) }
-    it {
-      is_expected.to have_http_status(:ok)
-      pp(user)
-    }
+    it { is_expected.to have_http_status(:ok) }
   end
 
   describe "#sign_in" do
