@@ -13,15 +13,4 @@ describe Users::RegistrationsController do
       it { expect { subject }.to change(User, :count).by(1) }
     end
   end
-  context "#login" do
-    let(:user) { create(:user) }
-    subject { get(:index) }
-    it {
-      is_expected.to have_http_status(:ok)
-      pp(user)
-    }
-  end
-
-  describe "#sign_in" do
-  end
 end

@@ -42,72 +42,28 @@ describe Users::SessionsController do
         expect(subject.status).to eq 401
       end
     end
+    context "when not json" do
+      subject { post(:create, params: {user: {email: "not_exists@example.com", password: "AaBbCcDd"}}) }
+
+      it "returns not acceptable status" do
+        expect(subject.status).to eq 406
+      end
+    end
   end
 
   describe "logout" do
-    before do
-      sign_in(user)
+    context "signed in user" do
+      before do
+        sign_in(user)
+      end
+      subject { delete(:destroy) }
+      it { expect(subject.status).to eq(200) }
+      it { expect(JSON[subject.body]["message"]).to eq("Successfully signed out.") }
     end
+  end
+  context "not signed in user" do
     subject { delete(:destroy) }
-    it { pp(subject) }
+    it { expect(subject.status).to eq(401) }
+    it { expect(JSON[subject.body]["message"]).to eq("You are not authorized.") }
   end
 end
-
-# RSpec.describe "DELETE /logout", type: :request do
-#   let(:url) { "/users/logout" }
-#
-#   it "returns 204, no content" do
-#     delete url
-#     expect(response).to have_http_status(204)
-#   end
-# end
-#
-# RSpec.describe "POST /signup", type: :request do
-#   let(:url) { "/users/signup" }
-#   let(:params) do
-#     {
-#       user: {
-#         username: "usertest2",
-#         email: "usertest2@email.com",
-#         password: "passwordtest123",
-#         password_confirmation: "passwordtest123"
-#       }
-#     }
-#   end
-#
-#   context "when user is unauthenticated" do
-#     before {
-#       post url,
-#         params: params.to_json,
-#         headers: {"CONTENT_TYPE" => "application/json", "ACCEPT" => "application/json"}
-#     }
-#
-#     it "returns 201" do
-#       expect(response.status).to eq 201
-#     end
-#
-#     it "returns a new user" do
-#       expect(response).to have_http_status :created
-#     end
-#   end
-#
-#   context "when user already exists" do
-#     before do
-#       post url,
-#         params: params.to_json,
-#         headers: {"CONTENT_TYPE" => "application/json", "ACCEPT" => "application/json"}
-#
-#       post url,
-#         params: params.to_json,
-#         headers: {"CONTENT_TYPE" => "application/json", "ACCEPT" => "application/json"}
-#     end
-#
-#     it "returns bad request status" do
-#       expect(response.status).to eq 400
-#     end
-#
-#     it "returns validation errors" do
-#       expect(response_body["errors"].first["title"]).to eq("Bad Request")
-#     end
-#   end
-# end

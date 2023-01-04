@@ -9,6 +9,7 @@
 .idea
 .idea/auth.iml
 /config/secrets.yml
+coverage
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
