@@ -3,14 +3,7 @@
 class Users::SessionsController < Devise::SessionsController
   skip_before_action :verify_signed_out_user
   respond_to :json
-  # before_action :configure_sign_in_params, only: [:create]
 
-  # GET /resource/sign_in
-  # def new
-  #   # super
-  # end
-
-  # POST /resource/sign_in
   def create
     unless request.format == :json
       sign_out
@@ -29,33 +22,16 @@ class Users::SessionsController < Devise::SessionsController
   # DELETE /resource/sign_out
   def destroy
     r = "Successfully signed out."
-
+    status = 200
     if warden.authenticated?(auth_options)
       sign_out
     else
+      status = 401
       r = "You are not authorized."
     end
 
-    render json: {message: r}
-
-    # super
-    # pp(Devise.sign_out_all_scopes, "sign out from all scopes")
-    # pp(sign_out, "sign out from")
-    # pp(resource_name, "kkkk")
-    # pp(sign_out(resource_name), "oooooo")
-    # signed_out = (Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name))
-    # pp(signed_out, "00000")
+    render status: status, json: {message: r}
   end
-
-  # protected
-
-  # If you have extra params to permit, append them to the sanitizer.
-  # def configure_sign_in_params
-  #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
-  # end
-  # def permitted_params
-  #     params.require(:api_user).permit(:email, :password)
-  #   end
 
   private
 

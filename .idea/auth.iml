@@ -59,6 +59,7 @@
     <orderEntry type="library" scope="PROVIDED" name="devise-jwt (v0.10.0, RVM: ruby-3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="devise_token_auth (v1.2.1, RVM: ruby-3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="diff-lcs (v1.5.0, RVM: ruby-3.0.0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="docile (v1.4.0, RVM: ruby-3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="dry-auto_inject (v0.9.0, RVM: ruby-3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="dry-configurable (v0.16.0, RVM: ruby-3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="dry-container (v0.11.0, RVM: ruby-3.0.0) [gem]" level="application" />
@@ -127,6 +128,9 @@
     <orderEntry type="library" scope="PROVIDED" name="sassc (v2.4.0, RVM: ruby-3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sassc-rails (v2.1.2, RVM: ruby-3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="selectize-rails (v0.12.6, RVM: ruby-3.0.0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="simplecov (v0.21.2, RVM: ruby-3.0.0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="simplecov-html (v0.12.3, RVM: ruby-3.0.0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="simplecov_json_formatter (v0.1.4, RVM: ruby-3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sprockets (v4.1.1, RVM: ruby-3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sprockets-rails (v3.4.2, RVM: ruby-3.0.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="standard (v1.18.1, RVM: ruby-3.0.0) [gem]" level="application" />
@@ -487,6 +491,11 @@
                 </subtasks>
               </RakeTaskImpl>
               <RakeTaskImpl description="" fullCommand="db:truncate_all" id="truncate_all" />
+            </subtasks>
+          </RakeTaskImpl>
+          <RakeTaskImpl id="devise">
+            <subtasks>
+              <RakeTaskImpl description="Send welcome reset password instructions to all users" fullCommand="devise:send_welcome_reset_password_instructions_to_all_users" id="send_welcome_reset_password_instructions_to_all_users" />
             </subtasks>
           </RakeTaskImpl>
           <RakeTaskImpl id="log">
