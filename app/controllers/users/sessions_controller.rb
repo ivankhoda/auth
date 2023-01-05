@@ -16,7 +16,7 @@ class Users::SessionsController < Devise::SessionsController
     end
     sign_in(resource_name, resource)
     response.set_header("jwt", current_token)
-    render json: {success: true, jwt: current_token}
+    render json: {success: true, jwt: current_token, refresh_token: resource.refresh_token}
   end
 
   # DELETE /resource/sign_out

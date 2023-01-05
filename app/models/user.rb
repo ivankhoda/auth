@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   include Devise::JWT::RevocationStrategies::JTIMatcher
   devise :database_authenticatable, :registerable, :validatable, :recoverable,
     :jwt_authenticatable, jwt_revocation_strategy: self
 
-  before_create :add_jti
+  before_create :add_jti, :generate_refresh_token
   attr_reader :token
   def add_jti
     self.jti ||= SecureRandom.uuid
@@ -33,5 +35,11 @@ class User < ApplicationRecord
     self.reset_password_sent_at = Time.now.utc
     save(validate: false)
     raw
+  end
+
+  private
+
+  def generate_refresh_token
+    self.refresh_token = SecureRandom.uuid
   end
 end
