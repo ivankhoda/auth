@@ -22,16 +22,4 @@ Rails.application.routes.draw do
     get "confirmation/:confirmation_token", to: "confirmations#show"
     patch "confirmation", to: "confirmations#create"
   end
-  namespace :api do
-    devise_for :users, defaults: {format: :json},
-      class_name: "ApiUser",
-      skip: [:registrations, :invitations, :passwords, :confirmations, :unlocks],
-      path: "",
-      path_names: {sign_in: "login",
-                   sign_out: "logout"}
-    devise_scope :api_user do
-      get "login", to: "devise/sessions#new"
-      delete "logout", to: "devise/sessions#destroy"
-    end
-  end
 end
