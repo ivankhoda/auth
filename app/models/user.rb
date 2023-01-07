@@ -7,6 +7,7 @@ class User < ApplicationRecord
 
   before_create :add_jti, :generate_refresh_token
   attr_reader :token
+
   def add_jti
     self.jti ||= SecureRandom.uuid
   end
