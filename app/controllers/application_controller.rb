@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :configure_permitted_parameters, if: :devise_controller?
+  # before_action :configure_permitted_parameters, if: :devise_controller?
   protect_from_forgery with: :exception, unless: :json_request?
   protect_from_forgery with: :null_session, if: :json_request?
   skip_before_action :verify_authenticity_token, if: :json_request?
@@ -24,6 +24,6 @@ class ApplicationController < ActionController::Base
   end
 
   def set_current_user
-    @current_user ||= warden.authenticate(scope: :api_user)
+    @current_user ||= warden.authenticate(scope: :user)
   end
 end

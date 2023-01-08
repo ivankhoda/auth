@@ -2,6 +2,7 @@
 
 class Users::RegistrationsController < Devise::RegistrationsController
   respond_to :json
+  before_action :authenticate_user!, except: [:create]
   # before_action :configure_sign_up_params, only: [:create]
 
   def create
