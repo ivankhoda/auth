@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   devise_scope :user do
     # get "sign_in", to: "devise/sessions#new"
     # patch "update_password", to: "users/passwords#edit"
-    get "register", to: "devise/registrations#new"
+    # get "register", to: "devise/registrations#new"
     post "register", to: "devise/registrations#create"
     delete "sign_out", to: "devise/sessions#destroy"
     get "confirmation/sent", to: "confirmations#sent"
