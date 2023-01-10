@@ -22,4 +22,8 @@ Rails.application.routes.draw do
     get "confirmation/:confirmation_token", to: "confirmations#show"
     patch "confirmation", to: "confirmations#create"
   end
+
+  namespace :slots do
+    resources :slots
+  end
 end
