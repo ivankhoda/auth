@@ -3,7 +3,7 @@ class CreateSlots < ActiveRecord::Migration[7.0]
     create_table :slots do |t|
       t.string :code, null: false
       t.string :name
-
+      t.belongs_to :user, index: true
       t.timestamps
     end
     add_index :slots, :code, unique: true

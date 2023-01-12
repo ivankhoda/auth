@@ -4,7 +4,8 @@ class Slots::SlotsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    @slot = Slot.new(slot_params)
+    pp(slot_creation_params, "0000")
+    @slot = Slot.new(slot_creation_params)
     if @slot.save!
       render json: {data: @slot}
     else
@@ -30,6 +31,10 @@ class Slots::SlotsController < ApplicationController
   end
 
   private
+
+  def slot_creation_params
+    slot_params.merge({user: current_user})
+  end
 
   def slot_params
     params.require(:slot).permit(:code, :name)
