@@ -17,10 +17,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_10_184324) do
   create_table "slots", force: :cascade do |t|
     t.string "code", null: false
     t.string "name"
+    t.bigint "user_id"
+    t.bigint "slot_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["code"], name: "index_slots_on_code", unique: true
     t.index ["name"], name: "index_slots_on_name", unique: true
+    t.index ["slot_id"], name: "index_slots_on_slot_id"
+    t.index ["user_id"], name: "index_slots_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -38,4 +42,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_10_184324) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "slots", "slots"
 end
