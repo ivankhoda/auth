@@ -4,7 +4,6 @@ class Slots::SlotsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    pp(slot_creation_params, "0000")
     @slot = Slot.new(slot_creation_params)
     if @slot.save!
       render json: {data: @slot}
@@ -14,11 +13,13 @@ class Slots::SlotsController < ApplicationController
   end
 
   def index
-    @slots = Slot.all
+    @slots = current_user_slots
+    render json: {data: @slots}
   end
 
   def show
-    @slot = Slot.find(params[:id])
+    @slot = current_user_slots.find(params[:id])
+    render json: {data: @slot}
   end
 
   def destroy
@@ -32,11 +33,15 @@ class Slots::SlotsController < ApplicationController
 
   private
 
+  def current_user_slots
+    current_user.slots
+  end
+
   def slot_creation_params
     slot_params.merge({user: current_user})
   end
 
   def slot_params
-    params.require(:slot).permit(:code, :name)
+    params.require(:slot).permit(:code, :name, :slot_id)
   end
 end

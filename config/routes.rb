@@ -23,7 +23,7 @@ Rails.application.routes.draw do
     patch "confirmation", to: "confirmations#create"
   end
 
-  namespace :slots do
+  scope module: :slots do
     resources :slots
   end
 end

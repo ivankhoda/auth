@@ -8,6 +8,10 @@ class User < ApplicationRecord
   before_create :add_jti, :generate_refresh_token
   attr_reader :token
 
+  has_many :slots
+
+  scope :slots, -> { slots }
+
   def add_jti
     self.jti ||= SecureRandom.uuid
   end
