@@ -10,20 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_10_184324) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_20_092312) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "items", force: :cascade do |t|
+    t.string "code"
+    t.string "name", null: false
+    t.bigint "user_id"
+    t.bigint "slot_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["code"], name: "index_items_on_code", unique: true
+    t.index ["name"], name: "index_items_on_name", unique: true
+    t.index ["slot_id"], name: "index_items_on_slot_id"
+    t.index ["user_id"], name: "index_items_on_user_id"
+  end
 
   create_table "slots", force: :cascade do |t|
     t.string "code", null: false
     t.string "name"
     t.bigint "user_id"
-    t.bigint "slot_id"
+    t.bigint "parent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["code"], name: "index_slots_on_code", unique: true
     t.index ["name"], name: "index_slots_on_name", unique: true
-    t.index ["slot_id"], name: "index_slots_on_slot_id"
+    t.index ["parent_id"], name: "index_slots_on_parent_id"
     t.index ["user_id"], name: "index_slots_on_user_id"
   end
 
@@ -42,5 +55,4 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_10_184324) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "slots", "slots"
 end
