@@ -1,25 +1,26 @@
 # frozen_string_literal = true
 
-class Slots::SlotsController < ApplicationController
+class Api::V0::Slots::SlotsController < ApplicationController
   before_action :authenticate_user!
+  wrap_parameters :slot, include: [:code, :name, :parent_id]
 
   def create
     @slot = Slot.new(slot_creation_params)
-    if @slot.save!
-      render json: {data: @slot}
+    if @slot.save
+      render json: {slot: @slot}
     else
-      render json: {errors: @slot.errors}, status: :unprocessable_entity
+      render json: {error: @slot.errors.full_messages}, status: :unprocessable_entity
     end
   end
 
   def index
     @slots = current_user_slots
-    render json: {data: @slots}
+    render json: {slots: @slots}
   end
 
   def show
     @slot = current_user_slots.find(params[:id])
-    render json: {data: @slot}
+    render json: {slot: @slot}
   end
 
   def destroy
@@ -42,6 +43,6 @@ class Slots::SlotsController < ApplicationController
   end
 
   def slot_params
-    params.require(:slot).permit(:code, :name, :slot_id)
+    params.require(:slot).permit(:code, :name, :parent_id)
   end
 end

@@ -23,7 +23,10 @@ Rails.application.routes.draw do
     patch "confirmation", to: "confirmations#create"
   end
 
-  scope module: :slots do
+  scope :api, module: :api do
     resources :slots
+  end
+  scope module: :items do
+    resources :items
   end
 end

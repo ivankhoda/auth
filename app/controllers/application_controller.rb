@@ -1,10 +1,11 @@
 class ApplicationController < ActionController::Base
   # before_action :configure_permitted_parameters, if: :devise_controller?
+  include ActionController::ParamsWrapper
   protect_from_forgery with: :exception, unless: :json_request?
   protect_from_forgery with: :null_session, if: :json_request?
   skip_before_action :verify_authenticity_token, if: :json_request?
-  rescue_from ActionController::InvalidAuthenticityToken, with: :invalid_auth_token
   before_action :set_current_user, if: :json_request?
+  rescue_from ActionController::InvalidAuthenticityToken, with: :invalid_auth_token
 
   private
 
@@ -13,8 +14,9 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_user!(*args)
-    super and return unless args.blank?
-    json_request? ? authenticate_api_user! : super
+    unless user_signed_in?
+      render json: {error: "Unauthorized"}, status: :unauthorized
+    end
   end
 
   def invalid_auth_token
