@@ -4,6 +4,6 @@ class Slot < ApplicationRecord
 
   has_many :items, foreign_key: "slot_id", inverse_of: :slot
 
-  validates :name, :code, uniqueness: true
+  validates :name, :code, uniqueness: {scope: :user_id}
   validates :name, presence: true
 end

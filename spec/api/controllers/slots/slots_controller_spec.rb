@@ -3,6 +3,7 @@ require "rails_helper"
 describe Api::SlotsController, type: :controller do
   describe "#create" do
     let!(:user) { create(:user) }
+
     before { sign_in user }
 
     subject { post :create, params: {code: "A1", name: "test"}, format: :json }
@@ -38,10 +39,18 @@ describe Api::SlotsController, type: :controller do
     let!(:slots) { create_list(:slot, 3, user: user) }
     before { sign_in user }
 
-    subject { get :show, params: {id: 1}, format: :json }
+    subject { get :show, params: {id: user.slots.first.id}, format: :json }
     it do
-      subject
-      pp(JSON.parse(response.body))
+      travel(0) do
+        subject
+        expect(response.body).to eq({id: user.slots.first.id,
+                                     code: user.slots.first.code,
+                                     name: user.slots.first.name,
+                                     user_id: user.id,
+                                     parent_id: nil,
+                                     created_at: user.slots.first.created_at,
+                                     updated_at: user.slots.first.updated_at}.to_json)
+      end
     end
   end
 end

@@ -9,8 +9,14 @@ class User < ApplicationRecord
   attr_reader :token
 
   has_many :slots
+  has_many :items
 
   scope :slots, -> { slots }
+  scope :user_slot_by_code, ->(user, code) { joins(:slots).where(slots: {user: user, code: code}) }
+
+  def user_slot_by(code)
+    slots.user_slot_by_code(self, code)
+  end
 
   def add_jti
     self.jti ||= SecureRandom.uuid

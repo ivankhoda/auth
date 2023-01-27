@@ -7,7 +7,7 @@ class CreateSlots < ActiveRecord::Migration[7.0]
       t.bigint :parent_id, foreign_key: true, index: true
       t.timestamps
     end
-    add_index :slots, :code, unique: true
-    add_index :slots, :name, unique: true
+    add_index :slots, [:user_id, :code], unique: true
+    add_index :slots, [:user_id, :name], unique: true
   end
 end

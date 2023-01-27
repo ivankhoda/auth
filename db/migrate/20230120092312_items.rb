@@ -7,7 +7,7 @@ class Items < ActiveRecord::Migration[7.0]
       t.belongs_to :slot, index: true
       t.timestamps
     end
-    add_index :items, :code, unique: true
-    add_index :items, :name, unique: true
+    add_index :items, [:user_id, :code], unique: true
+    add_index :items, [:user_id, :name], unique: true
   end
 end

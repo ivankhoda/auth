@@ -25,8 +25,6 @@ Rails.application.routes.draw do
 
   scope :api, module: :api do
     resources :slots
-  end
-  scope module: :items do
     resources :items
   end
 end
