@@ -21,9 +21,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_20_092312) do
     t.bigint "slot_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["code"], name: "index_items_on_code", unique: true
-    t.index ["name"], name: "index_items_on_name", unique: true
     t.index ["slot_id"], name: "index_items_on_slot_id"
+    t.index ["user_id", "code"], name: "index_items_on_user_id_and_code", unique: true
+    t.index ["user_id", "name"], name: "index_items_on_user_id_and_name", unique: true
     t.index ["user_id"], name: "index_items_on_user_id"
   end
 
@@ -34,9 +34,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_20_092312) do
     t.bigint "parent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["code"], name: "index_slots_on_code", unique: true
-    t.index ["name"], name: "index_slots_on_name", unique: true
     t.index ["parent_id"], name: "index_slots_on_parent_id"
+    t.index ["user_id", "code"], name: "index_slots_on_user_id_and_code", unique: true
+    t.index ["user_id", "name"], name: "index_slots_on_user_id_and_name", unique: true
     t.index ["user_id"], name: "index_slots_on_user_id"
   end
 
