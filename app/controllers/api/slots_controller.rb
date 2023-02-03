@@ -18,10 +18,13 @@ module Api
       render json: @slots
     end
 
+
     def show
-      @slot = current_user_slots.find(params[:id])
-      render json: @slot
+      @slot = current_user_slots.find_by(uuid: params[:id])
+      render json: Slot::SlotSerializer.new(@slot, slot_params).execute
     end
+
+
 
     def destroy
       @slot = Slot.find(params[:id])
@@ -34,6 +37,10 @@ module Api
 
     private
 
+    def options
+      slot_params.to_h
+    end
+
     def current_user_slots
       current_user.slots
     end
@@ -43,7 +50,7 @@ module Api
     end
 
     def slot_params
-      params.permit(:code, :name, :parent_id)
+      params.permit(:id, :code, :name, :parent_id, :with_items, :with_child_slots)
     end
   end
 end
