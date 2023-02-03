@@ -280,7 +280,7 @@ Devise.setup do |config|
     ]
     jwt.request_formats = {api_user: [:json]}
     jwt.request_formats = {user: [:json]}
-    jwt.expiration_time = 30.minutes.to_i
+    jwt.expiration_time = 30.hours.to_i
   end
   # The default HTTP method used to sign out a resource. Default is :delete.
   config.sign_out_via = :delete
