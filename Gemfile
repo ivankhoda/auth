@@ -29,6 +29,7 @@ gem "devise-jwt"
 gem "devise_token_auth"
 # authorization
 gem "jwt"
+
 # admin
 gem "administrate"
 
