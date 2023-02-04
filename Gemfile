@@ -32,8 +32,7 @@ gem "jwt"
 # admin
 gem "administrate"
 
-gem 'will_paginate'
-
+gem "will_paginate"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
@@ -59,11 +58,7 @@ group :development, :test do
   gem "rspec-rails"
   gem "byebug", platform: :mri
   gem "warden-jwt_auth"
-  gem "devise"
-  gem "devise-jwt"
-  gem "devise_token_auth"
   # authorization
-  gem "jwt"
   gem "capybara"
   gem "rails-controller-testing"
   gem "pry"
