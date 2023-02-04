@@ -40,7 +40,7 @@ jobs:
       - name: Run tests and collect coverage
         run: bundle exec rake test | bundle exec codecov
       - name: Upload coverage to Codecov
-        uses: codecov-action@v3
+        uses: codecov/codecov-action@v3
         with:
          token: ${{ secrets.CODECOV_TOKEN }}
 
