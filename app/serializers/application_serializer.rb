@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ApplicationSerializer < ActiveModel::Serializer
+class ApplicationSerializer
   def initialize(record)
     @record = record
   end
@@ -16,6 +16,7 @@ class ApplicationSerializer < ActiveModel::Serializer
   end
 
   private
+
   attr_reader :record, :options
 
   def children_exists(child)

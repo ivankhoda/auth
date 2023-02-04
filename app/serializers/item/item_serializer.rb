@@ -1,29 +1,26 @@
 # frozen_string_literal = true
 
 class Item::ItemSerializer < ApplicationSerializer
-  def initialize(record, options={})
+  def initialize(record, options = {})
     @item = super(record)
     @options = options
-    @with_location = options[:with_location] == 'true'
+    @with_slot = options[:with_slot] == "true"
   end
 
   def execute
-  #  todo
+    item.slice(:code, :name, :slot_id, :created_at, :updated_at)
   end
 
   private
-  attr_reader :item, :with_items, :with_location
 
-
+  attr_reader :item, :with_slot
 
   def slots
-    #  todo
     get_slot
   end
 
   def get_slot
-    #  todo
-    slots = Slot::CollectionSerializer.new(item.slots).execute
+    slots = Slot::CollectionSerializer.new(item.slot).execute
     {slots: slots}
   end
 end
