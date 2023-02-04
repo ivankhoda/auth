@@ -13,7 +13,7 @@ class Slot::CollectionSerializer < ApplicationSerializer
   attr_reader :slots
 
   def serialized_slots
-     slots.map {|s| Slot::SlotSerializer.new(s).execute.slice(:uuid, :code) }
+     slots.map { |s| Slot::SlotSerializer.new(s).execute }
   end
 
 end

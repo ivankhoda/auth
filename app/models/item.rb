@@ -4,5 +4,9 @@ class Item < ApplicationRecord
 
   validates :name, uniqueness: true
   validates :name, presence: true
-  validates :code, uniqueness: {allow_nil: true}
+  validates :code, uniqueness: { allow_nil: true }
+
+  def self.search(query)
+    where("code LIKE ?", "%#{query}%")
+  end
 end

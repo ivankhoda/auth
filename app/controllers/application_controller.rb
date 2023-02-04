@@ -28,4 +28,5 @@ class ApplicationController < ActionController::Base
   def set_current_user
     @current_user ||= warden.authenticate(scope: :user)
   end
+
 end
