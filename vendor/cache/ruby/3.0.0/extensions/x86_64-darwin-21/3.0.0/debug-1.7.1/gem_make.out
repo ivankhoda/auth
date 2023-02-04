@@ -1,0 +1,16 @@
+current directory: /Users/ivan/websites/practise/auth/vendor/cache/ruby/3.0.0/gems/debug-1.7.1/ext/debug
+/Users/ivan/.rvm/rubies/ruby-3.0.0/bin/ruby -I /Users/ivan/.rvm/rubies/ruby-3.0.0/lib/ruby/3.0.0 -r ./siteconf20230204-25047-v2pryr.rb extconf.rb
+creating Makefile
+
+current directory: /Users/ivan/websites/practise/auth/vendor/cache/ruby/3.0.0/gems/debug-1.7.1/ext/debug
+make "DESTDIR=" clean
+
+current directory: /Users/ivan/websites/practise/auth/vendor/cache/ruby/3.0.0/gems/debug-1.7.1/ext/debug
+make "DESTDIR="
+compiling debug.c
+compiling iseq_collector.c
+linking shared-object debug/debug.bundle
+
+current directory: /Users/ivan/websites/practise/auth/vendor/cache/ruby/3.0.0/gems/debug-1.7.1/ext/debug
+make "DESTDIR=" install
+/usr/local/opt/coreutils/bin/ginstall -c -m 0755 debug.bundle ./.gem.20230204-25047-qrkwh1/debug
