@@ -18,12 +18,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def invalid_auth_token
-    respond_to do |format|
-      format.json { head 401 }
-    end
-  end
-
   def set_current_user
     @current_user ||= warden.authenticate(scope: :user)
   end

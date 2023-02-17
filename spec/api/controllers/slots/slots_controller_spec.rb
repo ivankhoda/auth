@@ -37,6 +37,7 @@ describe Api::SlotsController, type: :controller do
     let!(:user2) { create(:user) }
     let!(:slots) { create_list(:slot, 3, user: user) }
     before { sign_in user }
+    after(:each) { sign_out user }
 
     subject { get :show, params: { id: user.slots.first.uuid }, format: :json }
     it do
@@ -49,6 +50,23 @@ describe Api::SlotsController, type: :controller do
                                       created_at: user.slots.first.created_at,
                                       updated_at: user.slots.first.updated_at }.to_json)
       end
+    end
+    context 'with items' do
+      let(:user3) { create(:user) }
+      let!(:slot_with_items) { create(:slot_with_items, user: user3) }
+      before { sign_in user3 }
+      subject { get :show, params: { id: slot_with_items.uuid, with_items: 'true' }, format: :json }
+      it do
+        subject
+        expect(response.body)
+          .to eq(Slot::SlotSerializer.new(slot_with_items, { with_items: 'true' }).execute.to_json)
+
+      end
+    end
+    context 'when not signed in' do
+      before { sign_out user }
+      subject { get :show, params: { id: user.slots.first.uuid }, format: :json }
+      it { is_expected.to have_http_status(401) }
     end
   end
 end

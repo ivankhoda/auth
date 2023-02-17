@@ -43,11 +43,17 @@ describe Users::SessionsController, type: :controller do
       end
     end
     context "when not json" do
-      subject { post(:create, params: {user: {email: "not_exists@example.com", password: "AaBbCcDd"}}) }
+      subject { post(:create, params: { user: { email: "not_exists@example.com", password: "AaBbCcDd" } }) }
 
       it "returns not acceptable status" do
         expect(subject.status).to eq 406
       end
+    end
+    context "when resource not found" do
+      before { sign_out user }
+      subject { post(:create, params: {}, format: :json) }
+
+      it { expect(subject.status).to eq 401 }
     end
   end
 
