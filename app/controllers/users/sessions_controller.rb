@@ -7,16 +7,14 @@ class Users::SessionsController < Devise::SessionsController
   def create
     unless request.format == :json
       sign_out
-      render status: 406, json: {message: "JSON requests only."} and return
+      render status: 406, json: { message: "JSON requests only." } and return
     end
 
     resource = warden.authenticate!(auth_options)
-    if resource.blank?
-      render status: 401, json: {response: "Access denied."} and return
-    end
+
     sign_in(resource_name, resource)
     response.set_header("jwt", current_token)
-    render json: {success: true, jwt: current_token, refresh_token: resource.refresh_token}
+    render json: { success: true, jwt: current_token, refresh_token: resource.refresh_token }
   end
 
   # DELETE /resource/sign_out
@@ -37,9 +35,5 @@ class Users::SessionsController < Devise::SessionsController
 
   def current_token
     request.env["warden-jwt_auth.token"]
-  end
-
-  def permitted_params
-    params.require(:user).permit(:email, :password)
   end
 end

@@ -29,6 +29,7 @@ gem "devise-jwt"
 gem "devise_token_auth"
 # authorization
 gem "jwt"
+
 # admin
 gem "administrate"
 
@@ -58,6 +59,7 @@ group :development, :test do
   gem "rspec-rails"
   gem "byebug", platform: :mri
   gem "warden-jwt_auth"
+  gem "will_paginate"
   # authorization
   gem "capybara"
   gem "rails-controller-testing"
