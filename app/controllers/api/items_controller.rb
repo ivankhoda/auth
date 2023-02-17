@@ -14,7 +14,7 @@ module Api
     end
 
     def index
-      @items = current_user_items.search(params[:code]).page(params[:page]).per(params[:per_page])
+      @items = current_user_items.search(params[:code]).paginate(page: params[:page], per_page: params[:per_page])
       render json: @items
     end
 

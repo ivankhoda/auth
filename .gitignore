@@ -10,6 +10,7 @@
 .idea/auth.iml
 /config/secrets.yml
 coverage
+vendor
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*

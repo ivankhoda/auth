@@ -5,5 +5,6 @@ FactoryBot.define do
     sequence(:id) { |n| "#{n}" }
     sequence(:code) { |n| "A#{n}" }
     sequence(:name) { |n| "Test #{n}" }
+    uuid { SecureRandom.uuid }
   end
 end

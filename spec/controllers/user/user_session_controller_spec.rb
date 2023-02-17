@@ -3,8 +3,8 @@
 require "rails_helper"
 require "json"
 
-describe Users::SessionsController do
-  before do
+describe Users::SessionsController, type: :controller do
+  before(:each) do
     @request.env["devise.mapping"] = Devise.mappings[:user]
   end
   let!(:user) { create(:user) }
@@ -20,7 +20,7 @@ describe Users::SessionsController do
   end
   describe "login" do
     context "when params are correct" do
-      subject { post(:create, params: {user: {email: "some@example.com", password: "AaBbCcDd"}}, format: :json) }
+      subject { post(:create, params: { user: { email: user.email, password: user.password } }, format: :json) }
 
       it { expect(subject).to have_http_status(200) }
 

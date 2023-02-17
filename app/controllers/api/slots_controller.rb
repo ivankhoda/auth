@@ -14,7 +14,7 @@ module Api
     end
 
     def index
-      @slots = current_user_slots.search(params[:code]).page(params[:page]).per(params[:per_page])
+      @slots = current_user_slots.search(params[:code]).paginate(page: params[:page], per_page: params[:per_page])
       render json: Slot::CollectionSerializer.new(@slots).execute
     end
 

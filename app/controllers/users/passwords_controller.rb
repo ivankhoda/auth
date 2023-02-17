@@ -10,11 +10,6 @@ class Users::PasswordsController < Devise::PasswordsController
     render json: {success: true, text: "Check your email", reset_password_token: resource.token}
   end
 
-  # GET /resource/password/edit?reset_password_token=abcdef
-  def edit
-    super
-  end
-
   def update
     self.resource = resource_class.reset_password_by_token(resource_params)
     yield resource if block_given?

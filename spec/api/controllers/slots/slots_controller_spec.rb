@@ -12,13 +12,12 @@ describe Api::SlotsController, type: :controller do
     it do
       travel(0) do
         subject
-        expect(response.body).to eq({id: 3,
-                                     code: "A1",
-                                     name: "test",
-                                     user_id: user.id,
-                                     parent_id: nil,
-                                     created_at: Time.now.utc,
-                                     updated_at: Time.now.utc}.to_json)
+        expect(response.body).to eq({ uuid: Slot.first.uuid,
+                                      code: "A1",
+                                      name: "test",
+                                      parent_id: nil,
+                                      created_at: Time.now.utc,
+                                      updated_at: Time.now.utc }.to_json)
       end
     end
   end
@@ -39,17 +38,16 @@ describe Api::SlotsController, type: :controller do
     let!(:slots) { create_list(:slot, 3, user: user) }
     before { sign_in user }
 
-    subject { get :show, params: {id: user.slots.first.id}, format: :json }
+    subject { get :show, params: { id: user.slots.first.uuid }, format: :json }
     it do
       travel(0) do
         subject
-        expect(response.body).to eq({id: user.slots.first.id,
-                                     code: user.slots.first.code,
-                                     name: user.slots.first.name,
-                                     user_id: user.id,
-                                     parent_id: nil,
-                                     created_at: user.slots.first.created_at,
-                                     updated_at: user.slots.first.updated_at}.to_json)
+        expect(response.body).to eq({ uuid: user.slots.first.uuid,
+                                      code: user.slots.first.code,
+                                      name: user.slots.first.name,
+                                      parent_id: nil,
+                                      created_at: user.slots.first.created_at,
+                                      updated_at: user.slots.first.updated_at }.to_json)
       end
     end
   end
