@@ -14,13 +14,15 @@ module Api
     end
 
     def index
-      @items = current_user_items.search(params[:code]).paginate(page: params[:page], per_page: params[:per_page])
-      render json: @items
+      @items = current_user_items.search(params[:code])
+                                 .paginate(page: params[:page], per_page: params[:per_page])
+                                 .preload(:slot)
+      render json: Item::CollectionSerializer.new(@items).execute
     end
 
     def show
       @item = current_user_items.find(params[:id])
-      render json: @item
+      render json: Item::ItemSerializer.new(@item).execute
     end
 
     def edit
