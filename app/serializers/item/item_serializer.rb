@@ -8,12 +8,18 @@ class Item::ItemSerializer < ApplicationSerializer
   end
 
   def execute
-    item.slice(:code, :name, :slot_id, :created_at, :updated_at)
+    prepared_slot
   end
 
   private
 
   attr_reader :item, :with_slot
+
+  def prepared_slot
+    item.slice(:code, :name, :created_at, :updated_at).tap do |i|
+      i[:parent_slot] = item.slot.name
+    end
+  end
 
   def slots
     get_slot
@@ -21,6 +27,6 @@ class Item::ItemSerializer < ApplicationSerializer
 
   def get_slot
     slots = Slot::CollectionSerializer.new(item.slot).execute
-    {slots: slots}
+    { slots: slots }
   end
 end
