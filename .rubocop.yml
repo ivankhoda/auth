@@ -1,0 +1,80 @@
+Documentation:
+  Enabled: false
+
+Metrics/ClassLength:
+  Max: 200
+
+Metrics/ModuleLength:
+  Max: 125
+
+Metrics/AbcSize:
+  Max: 25
+
+Style/GuardClause:
+  Enabled: false
+
+Metrics/ParameterLists:
+  CountKeywordArgs: false
+
+Naming/UncommunicativeMethodParamName:
+  AllowedNames:
+    -tr
+    -ip
+    -id
+
+Style/DoubleNegation:
+  Enabled: false
+
+Style/ParallelAssignment:
+  Enabled: false
+
+Metrics/BlockLength:
+  ExcludedMethods:
+    - context
+    - describe
+    - feature
+    - UseCache
+    - define
+    - factory
+    - before
+    - it
+
+Metrics/LineLength:
+  Max: 120
+
+Metrics/MethodLength:
+  Max: 25
+  ExcludedMethods:
+    - up
+    - change
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/RescueStandardError:
+  Enabled: false
+
+Style/SafeNavigation:
+  Enabled: true
+
+Metrics/CyclomaticComplexity:
+  Max: 8
+  Enabled: true
+
+AllCops:
+  TargetRubyVersion: 2.4
+  UseCache: true
+  CacheRootDirectory: tmp
+  Exclude:
+    - '.bundle/**/*'
+    - '.rvm'
+    - 'coverage/**/*'
+    - 'db/schema.rb'
+    - 'log/**/*'
+    - 'node_modules/**/*'
+    - 'public/**/*'
+    - 'tmp/**/*'
+    - 'vendor/**/*'
+    - '.git/**/*'
+    - '.ruby-version'
+    - '.idea/**/*'

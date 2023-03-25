@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Item < ApplicationRecord
   belongs_to :user, optional: false, foreign_key: "user_id", inverse_of: :items
   belongs_to :slot, optional: false, foreign_key: "slot_id", inverse_of: :items

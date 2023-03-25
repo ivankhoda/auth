@@ -20,13 +20,4 @@ class Item::ItemSerializer < ApplicationSerializer
       i[:parent_slot] = item.slot.name
     end
   end
-
-  def slots
-    get_slot
-  end
-
-  def get_slot
-    slots = Slot::CollectionSerializer.new(item.slot).execute
-    { slots: slots }
-  end
 end

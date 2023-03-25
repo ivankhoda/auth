@@ -1,0 +1,15 @@
+ignore_files:
+  - app/channels/application_cable/channel.rb
+  - app/channels/application_cable/connection.rb
+  - app/mailers/user_mailer.rb
+  - app/controllers/api/sessions_controller.rb
+  - app/controllers/api/sessions_controller.rb
+  - app/controllers/api/v0/items/items_controller.rb
+  - app/controllers/api/v0/slots/slots_controller.rb
+  - app/jobs/application_job.rb
+  - app/mailers/application_mailer.rb
+  - app/models/api_user.rb
+  - app/models/jwt_blacklist.rb
+
+
+

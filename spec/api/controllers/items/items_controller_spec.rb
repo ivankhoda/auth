@@ -13,13 +13,13 @@ describe Api::ItemsController, type: :controller do
     it do
       travel(0) do
         subject
-        expect(response.body).to eq({id: 3,
-                                     code: "A1",
-                                     name: "test",
-                                     user_id: user.id,
-                                     slot_id: slot.id,
-                                     created_at: Time.now.utc,
-                                     updated_at: Time.now.utc}.to_json)
+        expect(response.body).to eq({ id: 3,
+                                      code: "A1",
+                                      name: "test",
+                                      user_id: user.id,
+                                      slot_id: slot.id,
+                                      created_at: Time.now.utc,
+                                      updated_at: Time.now.utc }.to_json)
       end
     end
   end
@@ -32,7 +32,6 @@ describe Api::ItemsController, type: :controller do
     subject { get :index, params: nil, format: :json }
     it do
       subject
-      pp(response.body)
       expect(JSON.parse(response.body).size).to eq(3)
     end
   end
@@ -46,14 +45,23 @@ describe Api::ItemsController, type: :controller do
     it do
       travel(0) do
         subject
-        expect(response.body).to eq({id: user.items.first.id,
-                                     code: user.items.first.code,
-                                     name: user.items.first.name,
-                                     user_id: user.id,
-                                     slot_id: slot.id,
-                                     created_at: user.items.first.created_at,
-                                     updated_at: user.items.first.updated_at}.to_json)
+        expect(response.body).to eq({ code: user.items.first.code,
+                                      name: user.items.first.name,
+                                      created_at: user.items.first.created_at,
+                                      updated_at: user.items.first.updated_at,
+                                      parent_slot: slot.name
+                                    }.to_json)
+      end
+    end
+    context '.with slot' do
+      let!(:item) { create(:item, user: user, slot: slot) }
+      subject { get :show, params: { id: item.id, with_slot: true }, format: :json }
+      it do
+        subject
+        expect(response.body)
+          .to eq(Item::ItemSerializer.new(item, { with_slot: 'true' }).execute.to_json)
       end
     end
   end
+
 end
