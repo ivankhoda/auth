@@ -13,5 +13,11 @@ FactoryBot.define do
         Array.new(5) { association(:item, slot: instance, user: instance.user) }
       end
     end
+
+    factory :slot_with_slots do
+      slots do
+        Array.new(2) { association(:slot, parent: instance, user: instance.user) }
+      end
+    end
   end
 end

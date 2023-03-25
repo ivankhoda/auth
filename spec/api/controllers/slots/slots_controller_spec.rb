@@ -24,12 +24,26 @@ describe Api::SlotsController, type: :controller do
   describe "#index" do
     let!(:user) { create(:user) }
     let!(:slots) { create_list(:slot, 3, user: user) }
+
     before { sign_in user }
 
     subject { get :index, params: nil, format: :json }
     it do
       subject
       expect(JSON.parse(response.body).size).to eq(3)
+    end
+    context '.search' do
+      let!(:slot) { create(:slot, user: user, code: "XXX") }
+      subject { get :index, params: { code: 'X' }, format: :json }
+      it do
+        subject
+        expect(response.body).to eq([{ uuid: slot.uuid,
+                                       code: slot.code,
+                                       name: slot.name,
+                                       parent_id: nil,
+                                       created_at: slot.created_at,
+                                       updated_at: slot.updated_at }].to_json)
+      end
     end
   end
   describe "#show" do
@@ -60,6 +74,18 @@ describe Api::SlotsController, type: :controller do
         subject
         expect(response.body)
           .to eq(Slot::SlotSerializer.new(slot_with_items, { with_items: 'true' }).execute.to_json)
+
+      end
+    end
+    context 'with slots' do
+      let(:user3) { create(:user) }
+      let!(:slot_with_slots) { create(:slot_with_slots, user: user3) }
+      before { sign_in user3 }
+      subject { get :show, params: { id: slot_with_slots.uuid, with_child_slots: 'true' }, format: :json }
+      it do
+        subject
+        expect(response.body)
+          .to eq(Slot::SlotSerializer.new(slot_with_slots, { with_child_slots: 'true' }).execute.to_json)
 
       end
     end
