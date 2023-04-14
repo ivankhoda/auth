@@ -6,8 +6,6 @@
 
 # Ignore bundler config.
 /.bundle
-.idea
-.idea/auth.iml
 /config/secrets.yml
 coverage
 vendor
