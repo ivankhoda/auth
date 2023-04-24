@@ -18,6 +18,11 @@ module Api
       render json: Slot::CollectionSerializer.new(@slots).execute
     end
 
+    def root_slots
+      @slots = current_user_slots.root_slots.paginate(page: params[:page], per_page: params[:per_page])
+      render json: Slot::CollectionSerializer.new(@slots).execute
+    end
+
     def show
       @slot = current_user_slots.find_by(uuid: params[:id])
       render json: Slot::SlotSerializer.new(@slot, slot_params).execute
@@ -28,7 +33,7 @@ module Api
       if @slot.update!(slot_update_params)
         render json: Slot::SlotSerializer.new(@slot).execute
       else
-        render json: { error: @slot.errors }, status: :unprocessable_entity
+        render json: {error: @slot.errors}, status: :unprocessable_entity
       end
     end
 
@@ -41,7 +46,7 @@ module Api
       if @slot.destroy
         render status: 204
       else
-        render json: { errors: @slot.errors }, status: :unprocessable_entity
+        render json: {errors: @slot.errors}, status: :unprocessable_entity
       end
     end
 
@@ -56,7 +61,7 @@ module Api
     end
 
     def slot_creation_params
-      slot_params.merge({ user: current_user })
+      slot_params.merge({user: current_user})
     end
 
     def slot_update_params

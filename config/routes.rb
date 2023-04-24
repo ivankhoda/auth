@@ -25,7 +25,8 @@ Rails.application.routes.draw do
 
   scope :api, module: :api do
     resources :slots
-    get 'slots/slots_by_parent/:id', to: 'slots#slots_by_parent'
+    get "slots/slots_by_parent/:id", to: "slots#slots_by_parent"
+    get "slots/root-slots", to: "slots#root_slots"
 
     resources :items
   end
