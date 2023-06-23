@@ -33,7 +33,7 @@ jobs:
 
       - name: Create DB
         env:
-            DATABASE_URL: postgres://postgres:@localhost:5432/auth_test
+            DATABASE_URL: ${{ secrets.PG_DATABASE_URL }}
             RAILS_ENV: test
             POSTGRES_USER: postgres
             POSTGRES_PASSWORD: password
