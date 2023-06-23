@@ -24,13 +24,8 @@ jobs:
         ports:
           - "5432:5432"
         env:
-          DATABASE_URL: postgres://postgres:@localhost:5432/test
-          PG_DATABASE: postgres
-          PG_HOST: localhost
-          PG_PORT: 5432
-          PG_USER: postgres
-          PG_PASSWORD: postgres
-          RAILS_ENV: test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
 
     steps:
       - name: Checkout code
@@ -38,6 +33,13 @@ jobs:
       # Add or replace dependency steps here
       - name: run bundle install
         run: bundle install --jobs=8 --path vendor/bundle
+
+      - name: Build and run test
+        env:
+            DATABASE_URL: postgres://postgres:@localhost:5432/test
+            RAILS_ENV: test
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
 
       - name: Run create DB
         run: RAILS_ENV=test bundle exec rake parallel:create
