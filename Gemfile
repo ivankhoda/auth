@@ -60,6 +60,7 @@ group :development, :test do
   gem "byebug", platform: :mri
   gem "warden-jwt_auth"
   gem "will_paginate"
+  gem "parallel_rspec", "~> 0.3.1"
   # authorization
   gem "capybara"
   gem "rails-controller-testing"
@@ -68,7 +69,6 @@ end
 
 group :test do
   gem "simplecov"
-  gem 'parallel_rspec', '~> 0.3.1'
 end
 
 group :development do
