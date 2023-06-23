@@ -1340,6 +1340,25 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library">
+      <library name="parallel_tests (vbundled(4.2.1)) [path][gem]" type="rubylib">
+        <properties>
+          <option name="version" value="4" />
+        </properties>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/.bundle/ruby/3.0.0/gems/parallel_tests-4.2.1/bin" />
+          <root url="file://$MODULE_DIR$/.bundle/ruby/3.0.0/gems/parallel_tests-4.2.1/lib" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/.bundle/ruby/3.0.0/gems/parallel_tests-4.2.1/bin" />
+          <root url="file://$MODULE_DIR$/.bundle/ruby/3.0.0/gems/parallel_tests-4.2.1/lib" />
+        </SOURCES>
+        <excluded>
+          <root url="file://$MODULE_DIR$/.bundle/ruby/3.0.0/gems/parallel_tests-4.2.1/bin" />
+        </excluded>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
       <library name="parser (vbundled(3.2.1.1)) [path][gem]" type="rubylib">
         <properties>
           <option name="version" value="4" />
@@ -2603,6 +2622,16 @@
               </RakeTaskImpl>
               <RakeTaskImpl description="" fullCommand="db:forward" id="forward" />
               <RakeTaskImpl description="" fullCommand="db:load_config" id="load_config" />
+              <RakeTaskImpl id="parallel">
+                <subtasks>
+                  <RakeTaskImpl description="" fullCommand="db:parallel:create" id="create" />
+                  <RakeTaskImpl description="" fullCommand="db:parallel:load" id="load" />
+                  <RakeTaskImpl description="" fullCommand="db:parallel:load_schema" id="load_schema" />
+                  <RakeTaskImpl description="" fullCommand="db:parallel:load_structure" id="load_structure" />
+                  <RakeTaskImpl description="" fullCommand="db:parallel:prepare" id="prepare" />
+                  <RakeTaskImpl description="" fullCommand="db:parallel:purge" id="purge" />
+                </subtasks>
+              </RakeTaskImpl>
               <RakeTaskImpl description="" fullCommand="db:purge" id="purge" />
               <RakeTaskImpl id="purge">
                 <subtasks>
@@ -2641,6 +2670,38 @@
             </subtasks>
           </RakeTaskImpl>
           <RakeTaskImpl description="Prints out your Rack middleware stack" fullCommand="middleware" id="middleware" />
+          <RakeTaskImpl id="parallel">
+            <subtasks>
+              <RakeTaskImpl description="Create test databases via db:create --&gt; parallel:create[num_cpus]" fullCommand="parallel:create[count]" id="create[count]" />
+              <RakeTaskImpl description="Drop test databases via db:drop --&gt; parallel:drop[num_cpus]" fullCommand="parallel:drop[count]" id="drop[count]" />
+              <RakeTaskImpl description="Run features in parallel with parallel:features[num_cpus]" fullCommand="parallel:features[count,pattern,options,pass_through]" id="features[count,pattern,options,pass_through]" />
+              <RakeTaskImpl description="Run features-spinach in parallel with parallel:features-spinach[num_cpus]" fullCommand="parallel:features-spinach[count,pattern,options,pass_through]" id="features-spinach[count,pattern,options,pass_through]" />
+              <RakeTaskImpl description="Load dumped schema for test databases via db:schema:load --&gt; parallel:load_schema[num_cpus]" fullCommand="parallel:load_schema[count]" id="load_schema[count]" />
+              <RakeTaskImpl description="Load structure for test databases via db:schema:load --&gt; parallel:load_structure[num_cpus]" fullCommand="parallel:load_structure[count]" id="load_structure[count]" />
+              <RakeTaskImpl description="Update test databases via db:migrate --&gt; parallel:migrate[num_cpus]" fullCommand="parallel:migrate[count]" id="migrate[count]" />
+              <RakeTaskImpl description="Update test databases by dumping and loading --&gt; parallel:prepare[num_cpus]" fullCommand="parallel:prepare[count]" id="prepare[count]" />
+              <RakeTaskImpl description="Launch given rake command in parallel" fullCommand="parallel:rake[command,count]" id="rake[command,count]" />
+              <RakeTaskImpl description="Rollback test databases via db:rollback --&gt; parallel:rollback[num_cpus]" fullCommand="parallel:rollback[count]" id="rollback[count]" />
+              <RakeTaskImpl description="Load the seed data from db/seeds.rb via db:seed --&gt; parallel:seed[num_cpus]" fullCommand="parallel:seed[count]" id="seed[count]" />
+              <RakeTaskImpl description="Setup test databases via db:setup --&gt; parallel:setup[num_cpus]" fullCommand="parallel:setup[count]" id="setup[count]" />
+              <RakeTaskImpl description="Run spec in parallel with parallel:spec[num_cpus]" fullCommand="parallel:spec[count,pattern,options,pass_through]" id="spec[count,pattern,options,pass_through]" />
+              <RakeTaskImpl description="Run test in parallel with parallel:test[num_cpus]" fullCommand="parallel:test[count,pattern,options,pass_through]" id="test[count,pattern,options,pass_through]" />
+              <RakeTaskImpl description="" fullCommand="parallel:create" id="create" />
+              <RakeTaskImpl description="" fullCommand="parallel:drop" id="drop" />
+              <RakeTaskImpl description="" fullCommand="parallel:features" id="features" />
+              <RakeTaskImpl description="" fullCommand="parallel:features-spinach" id="features-spinach" />
+              <RakeTaskImpl description="" fullCommand="parallel:load_schema" id="load_schema" />
+              <RakeTaskImpl description="" fullCommand="parallel:load_structure" id="load_structure" />
+              <RakeTaskImpl description="" fullCommand="parallel:migrate" id="migrate" />
+              <RakeTaskImpl description="" fullCommand="parallel:prepare" id="prepare" />
+              <RakeTaskImpl description="" fullCommand="parallel:rake" id="rake" />
+              <RakeTaskImpl description="" fullCommand="parallel:rollback" id="rollback" />
+              <RakeTaskImpl description="" fullCommand="parallel:seed" id="seed" />
+              <RakeTaskImpl description="" fullCommand="parallel:setup" id="setup" />
+              <RakeTaskImpl description="" fullCommand="parallel:spec" id="spec" />
+              <RakeTaskImpl description="" fullCommand="parallel:test" id="test" />
+            </subtasks>
+          </RakeTaskImpl>
           <RakeTaskImpl description="Restart app by touching tmp/restart.txt" fullCommand="restart" id="restart" />
           <RakeTaskImpl description="Generate a cryptographically secure secret key (this is typically used to generate a secret for cookie sessions)" fullCommand="secret" id="secret" />
           <RakeTaskImpl description="Run all specs in spec directory (excluding plugin specs)" fullCommand="spec" id="spec" />
