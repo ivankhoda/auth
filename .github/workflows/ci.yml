@@ -21,10 +21,21 @@ jobs:
     services:
       postgres:
         image: postgres:15.2
+        ports:
+          - "5432:5432"
         env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          ports: [ '5432:5432' ]
+          PG_DATABASE: postgres
+          PG_HOST: localhost
+          PG_PORT: 5432
+          PG_USER: postgres
+          PG_PASSWORD: postgres
+          RAILS_ENV: test
+        options:
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
