@@ -1340,21 +1340,21 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library">
-      <library name="parallel_tests (vbundled(4.2.1)) [path][gem]" type="rubylib">
+      <library name="parallel_tests (vbundled(2.32.0)) [path][gem]" type="rubylib">
         <properties>
           <option name="version" value="4" />
         </properties>
         <CLASSES>
-          <root url="file://$MODULE_DIR$/.bundle/ruby/3.0.0/gems/parallel_tests-4.2.1/bin" />
-          <root url="file://$MODULE_DIR$/.bundle/ruby/3.0.0/gems/parallel_tests-4.2.1/lib" />
+          <root url="file://$MODULE_DIR$/.bundle/ruby/3.0.0/gems/parallel_tests-2.32.0/bin" />
+          <root url="file://$MODULE_DIR$/.bundle/ruby/3.0.0/gems/parallel_tests-2.32.0/lib" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="file://$MODULE_DIR$/.bundle/ruby/3.0.0/gems/parallel_tests-4.2.1/bin" />
-          <root url="file://$MODULE_DIR$/.bundle/ruby/3.0.0/gems/parallel_tests-4.2.1/lib" />
+          <root url="file://$MODULE_DIR$/.bundle/ruby/3.0.0/gems/parallel_tests-2.32.0/bin" />
+          <root url="file://$MODULE_DIR$/.bundle/ruby/3.0.0/gems/parallel_tests-2.32.0/lib" />
         </SOURCES>
         <excluded>
-          <root url="file://$MODULE_DIR$/.bundle/ruby/3.0.0/gems/parallel_tests-4.2.1/bin" />
+          <root url="file://$MODULE_DIR$/.bundle/ruby/3.0.0/gems/parallel_tests-2.32.0/bin" />
         </excluded>
       </library>
     </orderEntry>
@@ -2677,7 +2677,7 @@
               <RakeTaskImpl description="Run features in parallel with parallel:features[num_cpus]" fullCommand="parallel:features[count,pattern,options,pass_through]" id="features[count,pattern,options,pass_through]" />
               <RakeTaskImpl description="Run features-spinach in parallel with parallel:features-spinach[num_cpus]" fullCommand="parallel:features-spinach[count,pattern,options,pass_through]" id="features-spinach[count,pattern,options,pass_through]" />
               <RakeTaskImpl description="Load dumped schema for test databases via db:schema:load --&gt; parallel:load_schema[num_cpus]" fullCommand="parallel:load_schema[count]" id="load_schema[count]" />
-              <RakeTaskImpl description="Load structure for test databases via db:schema:load --&gt; parallel:load_structure[num_cpus]" fullCommand="parallel:load_structure[count]" id="load_structure[count]" />
+              <RakeTaskImpl description="Load structure for test databases via db:structure:load --&gt; parallel:load_structure[num_cpus]" fullCommand="parallel:load_structure[count]" id="load_structure[count]" />
               <RakeTaskImpl description="Update test databases via db:migrate --&gt; parallel:migrate[num_cpus]" fullCommand="parallel:migrate[count]" id="migrate[count]" />
               <RakeTaskImpl description="Update test databases by dumping and loading --&gt; parallel:prepare[num_cpus]" fullCommand="parallel:prepare[count]" id="prepare[count]" />
               <RakeTaskImpl description="Launch given rake command in parallel" fullCommand="parallel:rake[command,count]" id="rake[command,count]" />
