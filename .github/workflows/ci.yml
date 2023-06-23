@@ -25,7 +25,7 @@ jobs:
           - "5432:5432"
         env:
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
+          POSTGRES_PASSWORD: password
 
     steps:
       - name: Checkout code
@@ -39,7 +39,7 @@ jobs:
             DATABASE_URL: postgres://postgres:@localhost:5432/auth_test
             RAILS_ENV: test
             POSTGRES_USER: postgres
-            POSTGRES_PASSWORD: postgres
+            POSTGRES_PASSWORD: password
         run: |
           apt-get -yqq install libpq-dev
           RAILS_ENV=test bundle exec rake parallel:create
