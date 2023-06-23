@@ -15,6 +15,9 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: auth_app
+      credentials:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
     services:
       postgres:
         image: postgres:-alpine
