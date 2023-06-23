@@ -1321,6 +1321,25 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library">
+      <library name="parallel_rspec (vbundled(0.3.1)) [path][gem]" type="rubylib">
+        <properties>
+          <option name="version" value="4" />
+        </properties>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/.bundle/ruby/3.0.0/gems/parallel_rspec-0.3.1/exe" />
+          <root url="file://$MODULE_DIR$/.bundle/ruby/3.0.0/gems/parallel_rspec-0.3.1/lib" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/.bundle/ruby/3.0.0/gems/parallel_rspec-0.3.1/exe" />
+          <root url="file://$MODULE_DIR$/.bundle/ruby/3.0.0/gems/parallel_rspec-0.3.1/lib" />
+        </SOURCES>
+        <excluded>
+          <root url="file://$MODULE_DIR$/.bundle/ruby/3.0.0/gems/parallel_rspec-0.3.1/exe" />
+        </excluded>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
       <library name="parser (vbundled(3.2.1.1)) [path][gem]" type="rubylib">
         <properties>
           <option name="version" value="4" />
@@ -2275,76 +2294,168 @@
   <component name="RailsGeneratorsCache">
     <option name="generators">
       <list>
+        <option value="active_record:application_record" />
+        <option value="active_record:devise" />
         <option value="active_record:migration" />
         <option value="active_record:model" />
-        <option value="active_record:observer" />
-        <option value="active_record:session_migration" />
+        <option value="active_record:multi_db" />
+        <option value="administrate:assets" />
+        <option value="administrate:assets:javascripts" />
+        <option value="administrate:assets:stylesheets" />
+        <option value="administrate:dashboard" />
+        <option value="administrate:field" />
+        <option value="administrate:view" />
+        <option value="administrate:views" />
+        <option value="administrate:views:edit" />
+        <option value="administrate:views:field" />
+        <option value="administrate:views:form" />
+        <option value="administrate:views:index" />
+        <option value="administrate:views:layout" />
+        <option value="administrate:views:navigation" />
+        <option value="administrate:views:new" />
+        <option value="administrate:views:show" />
+        <option value="application_record" />
+        <option value="benchmark" />
+        <option value="channel" />
         <option value="controller" />
-        <option value="erb:controller" />
-        <option value="erb:mailer" />
-        <option value="erb:scaffold" />
+        <option value="devise" />
+        <option value="devise:controllers" />
+        <option value="devise:install" />
+        <option value="devise:views" />
+        <option value="devise_token_auth:install" />
+        <option value="devise_token_auth:install_mongoid" />
+        <option value="devise_token_auth:install_views" />
+        <option value="factory_bot:model" />
         <option value="generator" />
-        <option value="helper" />
         <option value="integration_test" />
+        <option value="job" />
+        <option value="kaminari:config" />
+        <option value="kaminari:views" />
+        <option value="mailbox" />
         <option value="mailer" />
-        <option value="metal" />
         <option value="migration" />
         <option value="model" />
-        <option value="model_subclass" />
-        <option value="observer" />
-        <option value="performance_test" />
-        <option value="plugin" />
+        <option value="mongoid:devise" />
         <option value="resource" />
+        <option value="responders:install" />
+        <option value="responders_controller" />
+        <option value="rspec:channel" />
+        <option value="rspec:controller" />
+        <option value="rspec:feature" />
+        <option value="rspec:generator" />
+        <option value="rspec:helper" />
+        <option value="rspec:install" />
+        <option value="rspec:integration" />
+        <option value="rspec:job" />
+        <option value="rspec:mailbox" />
+        <option value="rspec:mailer" />
+        <option value="rspec:model" />
+        <option value="rspec:request" />
+        <option value="rspec:scaffold" />
+        <option value="rspec:system" />
+        <option value="rspec:view" />
         <option value="scaffold" />
         <option value="scaffold_controller" />
-        <option value="session_migration" />
-        <option value="stylesheets" />
+        <option value="scss:assets" />
+        <option value="scss:scaffold" />
+        <option value="system_test" />
+        <option value="task" />
+        <option value="test_unit:channel" />
         <option value="test_unit:controller" />
+        <option value="test_unit:generator" />
         <option value="test_unit:helper" />
+        <option value="test_unit:install" />
         <option value="test_unit:integration" />
+        <option value="test_unit:job" />
+        <option value="test_unit:mailbox" />
         <option value="test_unit:mailer" />
         <option value="test_unit:model" />
-        <option value="test_unit:observer" />
-        <option value="test_unit:performance" />
         <option value="test_unit:plugin" />
         <option value="test_unit:scaffold" />
+        <option value="test_unit:system" />
       </list>
     </option>
     <option name="myGenerators">
       <list>
+        <option value="active_record:application_record" />
+        <option value="active_record:devise" />
         <option value="active_record:migration" />
         <option value="active_record:model" />
-        <option value="active_record:observer" />
-        <option value="active_record:session_migration" />
+        <option value="active_record:multi_db" />
+        <option value="administrate:assets" />
+        <option value="administrate:assets:javascripts" />
+        <option value="administrate:assets:stylesheets" />
+        <option value="administrate:dashboard" />
+        <option value="administrate:field" />
+        <option value="administrate:view" />
+        <option value="administrate:views" />
+        <option value="administrate:views:edit" />
+        <option value="administrate:views:field" />
+        <option value="administrate:views:form" />
+        <option value="administrate:views:index" />
+        <option value="administrate:views:layout" />
+        <option value="administrate:views:navigation" />
+        <option value="administrate:views:new" />
+        <option value="administrate:views:show" />
+        <option value="application_record" />
+        <option value="benchmark" />
+        <option value="channel" />
         <option value="controller" />
-        <option value="erb:controller" />
-        <option value="erb:mailer" />
-        <option value="erb:scaffold" />
+        <option value="devise" />
+        <option value="devise:controllers" />
+        <option value="devise:install" />
+        <option value="devise:views" />
+        <option value="devise_token_auth:install" />
+        <option value="devise_token_auth:install_mongoid" />
+        <option value="devise_token_auth:install_views" />
+        <option value="factory_bot:model" />
         <option value="generator" />
-        <option value="helper" />
         <option value="integration_test" />
+        <option value="job" />
+        <option value="kaminari:config" />
+        <option value="kaminari:views" />
+        <option value="mailbox" />
         <option value="mailer" />
-        <option value="metal" />
         <option value="migration" />
         <option value="model" />
-        <option value="model_subclass" />
-        <option value="observer" />
-        <option value="performance_test" />
-        <option value="plugin" />
+        <option value="mongoid:devise" />
         <option value="resource" />
+        <option value="responders:install" />
+        <option value="responders_controller" />
+        <option value="rspec:channel" />
+        <option value="rspec:controller" />
+        <option value="rspec:feature" />
+        <option value="rspec:generator" />
+        <option value="rspec:helper" />
+        <option value="rspec:install" />
+        <option value="rspec:integration" />
+        <option value="rspec:job" />
+        <option value="rspec:mailbox" />
+        <option value="rspec:mailer" />
+        <option value="rspec:model" />
+        <option value="rspec:request" />
+        <option value="rspec:scaffold" />
+        <option value="rspec:system" />
+        <option value="rspec:view" />
         <option value="scaffold" />
         <option value="scaffold_controller" />
-        <option value="session_migration" />
-        <option value="stylesheets" />
+        <option value="scss:assets" />
+        <option value="scss:scaffold" />
+        <option value="system_test" />
+        <option value="task" />
+        <option value="test_unit:channel" />
         <option value="test_unit:controller" />
+        <option value="test_unit:generator" />
         <option value="test_unit:helper" />
+        <option value="test_unit:install" />
         <option value="test_unit:integration" />
+        <option value="test_unit:job" />
+        <option value="test_unit:mailbox" />
         <option value="test_unit:mailer" />
         <option value="test_unit:model" />
-        <option value="test_unit:observer" />
-        <option value="test_unit:performance" />
         <option value="test_unit:plugin" />
         <option value="test_unit:scaffold" />
+        <option value="test_unit:system" />
       </list>
     </option>
   </component>
