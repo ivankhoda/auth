@@ -25,7 +25,7 @@ jobs:
           - "5432:5432"
         env:
           POSTGRES_HOST: db
-          POSTGRES_DB: auth_test
+          POSTGRES_DB: postgres
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: password
     env:
