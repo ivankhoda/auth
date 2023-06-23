@@ -33,7 +33,7 @@ jobs:
 
       - name: Create DB
         env:
-            DATABASE_URL: postgres://postgres:@postgres:5432/auth_test
+            DATABASE_URL: postgres://postgres:@auth_test:5432
             RAILS_ENV: test
             POSTGRES_USER: postgres
             POSTGRES_PASSWORD: password
