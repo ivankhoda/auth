@@ -14,7 +14,12 @@ module Api
     end
 
     def index
-      @slots = current_user_slots.search(params[:code]).paginate(page: params[:page], per_page: params[:per_page])
+      @slots = if params[:root_slots] == "true"
+        current_user_slots.root_slots.paginate(page: params[:page], per_page: params[:per_page])
+      else
+        current_user_slots.search(params[:code]).paginate(page: params[:page], per_page: params[:per_page])
+      end
+
       render json: Slot::CollectionSerializer.new(@slots).execute
     end
 
@@ -69,7 +74,7 @@ module Api
     end
 
     def slot_params
-      params.permit(:id, :code, :name, :parent_id, :with_items, :with_child_slots)
+      params.permit(:id, :code, :name, :parent_id, :with_items, :with_child_slots, :root_slots)
     end
   end
 end

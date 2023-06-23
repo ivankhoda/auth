@@ -3,13 +3,20 @@ services:
   db:
     image: postgres:alpine
     environment:
-      POSTGRES_DB: "db"
+      POSTGRES_DB: "auth_development"
       POSTGRES_HOST_AUTH_METHOD: "trust"
     restart: always
     volumes:
       - ./tmp/db:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+  redis:
+    image: redis:3
+    ports:
+        # If you're also running a Redis instance on host, map 6379 in container to a different port on host,
+        # such as 6380. Otherwise can use "6379:6379" here. This is useful for connecting a Redis client from
+        # host machine to container.
+        - "6380:6379"
   app:
     build: .
     restart: always
@@ -20,6 +27,7 @@ services:
     ports:
       - "3000:3000"
     depends_on:
-      - db
+      - "db"
+      - "redis"
 volumes:
   bundle_path:

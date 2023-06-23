@@ -1,22 +1,12 @@
 FROM ruby:3.0.0 AS auth_app
 
+RUN apt-get update && apt-get install -y curl build-essential gnupg postgresql-client
+
+RUN gem install bundler --no-document -v '2.4.13'
+
 # Default directory
 WORKDIR /app
-
-COPY Gemfile Gemfile.lock ./
+COPY . /app
 
 # Install the required gems
-RUN bundle install
-
-# Copy the rest of the application code to the container
-COPY . .
-
-ENV RAILS_ENV=development
-
-ENV POSTGRES_HOST=auth_development
-ENV POSTGRES_PORT=5432
-
-EXPOSE 3000
-
-# Start the Rails server
-CMD ["rails", "server", "-b", "0.0.0.0"]
+RUN bundle check || bundle install

@@ -68,6 +68,7 @@ end
 
 group :test do
   gem "simplecov"
+  gem 'parallel_rspec', '~> 0.3.1'
 end
 
 group :development do
