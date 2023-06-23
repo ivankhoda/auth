@@ -24,11 +24,12 @@ jobs:
         ports:
           - "5432:5432"
         env:
-          POSTGRES_HOST: db
-          POSTGRES_DB: auth_test
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: password
-          POSTGRES_PORT: 5432
+          PG_DATABASE: postgres
+          PG_HOST: localhost
+          PG_PORT: 5432
+          PG_USER: postgres
+          PG_PASSWORD: postgres
+          RAILS_ENV: test
 
     steps:
       - name: Checkout code
