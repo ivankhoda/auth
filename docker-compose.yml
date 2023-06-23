@@ -3,7 +3,7 @@ services:
   db:
     image: postgres:15.2
     environment:
-      POSTGRES_DB: "auth"
+      POSTGRES_DB: "auth_development"
       POSTGRES_HOST_AUTH_METHOD: "trust"
     restart: always
     volumes:
