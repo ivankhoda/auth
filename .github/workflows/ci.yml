@@ -22,7 +22,6 @@ jobs:
       postgres:
         image: postgres:15.2
         env:
-          RAILS_ENV: test
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
           ports: [ '5432:5432' ]
