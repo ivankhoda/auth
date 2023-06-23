@@ -41,7 +41,7 @@ jobs:
             POSTGRES_USER: postgres
             POSTGRES_PASSWORD: postgres
         run: |
-          sudo apt-get -yqq install libpq-dev
+          apt-get -yqq install libpq-dev
           RAILS_ENV=test bundle exec rake parallel:create
 
       - name: Run load from schema
