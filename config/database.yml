@@ -62,12 +62,12 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: auth_test
+  database: auth_development
   adapter: postgresql
   encoding: unicode
   pool: 5
   username: postgres
-  password:
+  password: password
   host: 127.0.0.1
   port: 5432
 
