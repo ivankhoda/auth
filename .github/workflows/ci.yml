@@ -23,9 +23,9 @@ jobs:
         image: postgres:15.2
         env:
           POSTGRES_HOST: 127.0.0.1
-          POSTGRES_DB: auth_development
+          POSTGRES_DB: auth
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: password
+          POSTGRES_PASSWORD:
         ports:
           - 5432:5432
 
