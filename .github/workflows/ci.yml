@@ -24,7 +24,7 @@ jobs:
         env:
           POSTGRES_HOST: 127.0.0.1
           POSTGRES_DB: auth_test
-          POSTGRES_USER: root
+          POSTGRES_USER: postgres
           POSTGRES_PASSWORD:
           POSTGRES_ALLOW_EMPTY_PASSWORD: yes
         ports:
