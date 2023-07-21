@@ -34,14 +34,21 @@ jobs:
         uses: actions/checkout@v1
       # Add or replace dependency steps here
       - name: Wait for PostgreSQL service
-        run: apt-get -yqq install libpq-dev
+        run: |
+              apt-get -yqq install libpq-dev
+              n=0
+              until [ $n -ge 15 ]; do
+                bundle exec rake db:version && break
+                n=$((n+1))
+                sleep 5
+              done
 
       - name: run bundle install
         run: bundle install --jobs=8 --path vendor/bundle
 
       - name: Create DB
         run: |
-          RAILS_ENV=test bundle exec rake db:create
+          RAILS_ENV=test bundle exec rake parallel:create
           
 
       - name: Run load from schema
