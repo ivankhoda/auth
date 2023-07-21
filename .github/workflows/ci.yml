@@ -21,8 +21,13 @@ jobs:
     services:
       postgres:
         image: postgres:15.2
+        env:
+          POSTGRES_HOST: 127.0.0.1
+          POSTGRES_USER: root
+          POSTGRES_PASSWORD:
+          POSTGRES_ALLOW_EMPTY_PASSWORD: yes
         ports:
-          - "5432"
+          - 5432:5432
 
     steps:
       - name: Checkout code
@@ -32,11 +37,6 @@ jobs:
         run: bundle install --jobs=8 --path vendor/bundle
 
       - name: Create DB
-        env:
-            DATABASE_URL: 127.0.0.1
-            RAILS_ENV: test
-            POSTGRES_USER: postgres
-            POSTGRES_PASSWORD: password
         run: |
           apt-get -yqq install libpq-dev
           RAILS_ENV=test bundle exec rake parallel:create
