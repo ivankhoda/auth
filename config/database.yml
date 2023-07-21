@@ -68,7 +68,7 @@ test:
   pool: 5
   username: postgres
   password:
-  host: localhost
+  host: 127.0.0.1
   port: 5432
 
 # As with config/credentials.yml, you never want to store sensitive information,
