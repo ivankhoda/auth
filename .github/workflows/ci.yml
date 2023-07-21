@@ -25,8 +25,7 @@ jobs:
           POSTGRES_HOST: 127.0.0.1
           POSTGRES_DB: auth_test
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD:
-          POSTGRES_ALLOW_EMPTY_PASSWORD: yes
+          POSTGRES_PASSWORD: xx
         ports:
           - 5432:5432
 

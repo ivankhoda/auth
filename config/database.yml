@@ -67,7 +67,7 @@ test:
   encoding: unicode
   pool: 5
   username: postgres
-  password:
+  password: xx
   host: localhost
   port: 5432
 
