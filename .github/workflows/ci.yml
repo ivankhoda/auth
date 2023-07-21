@@ -41,7 +41,7 @@ jobs:
 
       - name: Create DB
         run: |
-          RAILS_ENV=test bundle exec rake parallel:create
+          RAILS_ENV=test bundle exec rake db:create
           
 
       - name: Run load from schema
