@@ -27,9 +27,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v1
-
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
       # Add or replace dependency steps here
       - name: run bundle install
         run: bundle install --jobs=8 --path vendor/bundle
