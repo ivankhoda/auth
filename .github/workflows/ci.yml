@@ -33,6 +33,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v1
 
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+
       - name: Create role
         run: docker exec auth-app bash -c "PGPASSWORD='' psql -U postgres -c \"create role myapp with createdb login password 'auth-app'\""
 
