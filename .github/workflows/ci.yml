@@ -33,6 +33,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v1
 
+      - name: Create role
+        run: docker exec auth-app bash -c "PGPASSWORD='' psql -U postgres -c \"create role myapp with createdb login password 'auth-app'\""
+
       - name: run bundle install
         run: bundle install --jobs=8 --path vendor/bundle
 
