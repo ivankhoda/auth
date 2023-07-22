@@ -32,39 +32,29 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v1
-      # Add or replace dependency steps here
-      - name: Wait for PostgreSQL service
-        run: |
-              apt-get -yqq install libpq-dev
-              n=0
-              until [ $n -ge 15 ]; do
-                bundle exec rake db:version && break
-                n=$((n+1))
-                sleep 5
-              done
 
       - name: run bundle install
         run: bundle install --jobs=8 --path vendor/bundle
-#
-#      - name: Create DB
-#        run: |
-#          RAILS_ENV=test bundle exec rake parallel:create
-#
-#
-#      - name: Run load from schema
-#        run: RAILS_ENV=test bundle exec rake parallel:rake[db:schema:load]
-#
-#      - name: Run migrate DB
-#        run: RAILS_ENV=test bundle exec rake parallel:migrate
-#
-#      - name: Run create tmp DB
-#        run: RAILS_ENV=test bundle exec rake tmp:create
-#
-#      - name: Run Rubocop
-#        run: bundle exec rubocop -c .rubocopignorebuild.yml
-#
-#      - name: Run rspec
-#        run: COVERAGE=true RAILS_ENV=test bundle exec parallel_rspec ./spec
+
+      - name: Create DB
+        run: |
+          RAILS_ENV=test bundle exec rake parallel:create
+
+
+      - name: Run load from schema
+        run: RAILS_ENV=test bundle exec rake parallel:rake[db:schema:load]
+
+      - name: Run migrate DB
+        run: RAILS_ENV=test bundle exec rake parallel:migrate
+
+      - name: Run create tmp DB
+        run: RAILS_ENV=test bundle exec rake tmp:create
+
+      - name: Run Rubocop
+        run: bundle exec rubocop -c .rubocopignorebuild.yml
+
+      - name: Run rspec
+        run: COVERAGE=true RAILS_ENV=test bundle exec parallel_rspec ./spec
 
       - name: Stash Coverage Results
         run: |
