@@ -37,6 +37,14 @@ jobs:
 
       - name: install PostgreSQL client
         run: apt-get install libpq-dev
+        
+      - name: Wait for PostgreSQL to be ready
+        run: |
+          until pg_isready -h localhost -p 5432; do
+            echo "PostgreSQL is not yet ready - waiting..."
+            sleep 5
+          done
+          echo "PostgreSQL is ready!"
 
 #       - name: Build and create DB
 #         env:
