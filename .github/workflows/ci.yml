@@ -34,12 +34,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: PG is runing
-        run: |
-              ps -ef | grep postgres
-
       - name: run bundle install
         run: bundle install --jobs=8 --path vendor/bundle
+
       - name: Create DB
         env:
           POSTGRES_USER: postgres
