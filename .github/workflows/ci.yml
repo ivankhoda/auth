@@ -37,19 +37,24 @@ jobs:
       - name: install PostgreSQL client
         run: sudo apt-get install libpq-dev
 
+      - name: install Bundler
+        run: gem install bundler
+
       - name: run bundle install
         run: bundle install --jobs=8 --path vendor/bundle
         
-      - name: Setup Database
+      - name: Setup database
         env:
-          RAILS_ENV: test
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: password
-          POSTGRES_PORT: 5432
-          POSTGRES_DB: auth
+            PG_DATABASE: postgres
+            PG_HOST: localhost
+            PG_USER: postgres
+            PG_PASSWORD: password
+            RAILS_ENV: test
+            WITH_COVERAGE: true
+            DISABLE_SPRING: 1
         run: |
-            bundle exec rake db:create
-            bundle exec rake db:schema:load
+            bundle exec rails db:prepare
+            bundle exec rake test
         
 
 #       - name: Build and create DB
