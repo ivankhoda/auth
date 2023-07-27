@@ -37,7 +37,7 @@ jobs:
       - name: PG is runing
         run: |
               ps -ef | grep postgres
-              find /tmp/ -name .s.PGSQL.5432
+              systemctl status postgresql
 
       - name: run bundle install
         run: bundle install --jobs=8 --path vendor/bundle
