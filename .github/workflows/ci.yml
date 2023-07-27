@@ -47,7 +47,7 @@ jobs:
           POSTGRES_DB: auth
           RAILS_ENV: test
         run: |
-              cp config/database.yml.github-actions >> config/database.yml
+              cp config/database.yml.github-actions config/database.yml
               bundle exec rake parallel:create
 #      - name: Setup database
 #        env:
