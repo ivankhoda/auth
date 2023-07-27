@@ -38,7 +38,7 @@ jobs:
         run: sudo apt-get install libpq-dev
 
       - name: install Bundler
-        run: gem install bundler
+        run: sudo gem install bundler
 
       - name: run bundle install
         run: bundle install --jobs=8 --path vendor/bundle
