@@ -13,11 +13,6 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    container:
-      image: ivankhoda/auth-app:latest
-      credentials:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
     services:
       db:
         image: postgres:15.2
@@ -25,30 +20,37 @@ jobs:
           POSTGRES_HOST: 127.0.0.1
           POSTGRES_DB: auth
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD:
+          POSTGRES_PASSWORD: password
         ports:
           - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
+    container:
+      image: ivankhoda/auth-app:latest
+      credentials:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v1
 
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v1
-      - name: Set up Docker Buildx
-        id: buildx
-        uses: docker/setup-buildx-action@v1
+      - name: install PostgreSQL client
+        run: sudo apt-get install libpq-dev
 
-
-      - name: Build and push staging images
-        uses: docker/build-push-action@v2
-        with:
-            context: .
-            tags: ${{secrets.ACR_URL_DEV}}/ocrapisdev:latest
-            push: true
-
-      - name: Create role
-        run: docker exec auth-app bash -c "PGPASSWORD='' psql -U postgres -c \"create role myapp with createdb login password 'auth-app'\""
+      - name: Build and create DB
+        env:
+          # use localhost for the host here because we have specified a container for the job.
+          # If we were running the job on the VM this would be postgres
+          POSTGRES_HOST: 127.0.0.1
+          POSTGRES_USER: postgres
+          POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }} # get randomly assigned published port
+          POSTGRES_PASSWORD: password
+          RAILS_ENV: test
+        run: |
+          gem install bundler
+          bundle install --jobs 4 --retry 3
+          bin/rails db:setup
 
       - name: run bundle install
         run: bundle install --jobs=8 --path vendor/bundle
