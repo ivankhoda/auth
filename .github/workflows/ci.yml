@@ -1,81 +1,56 @@
-# This workflow uses actions that are not certified by GitHub.  They are
-# provided by a third-party and are governed by separate terms of service,
-# privacy policy, and support documentation.
-#
-# This workflow will install a prebuilt Ruby version, install dependencies, and
-# run tests and linters.
-name: "Ruby on Rails CI"
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+# .github/workflows/rspec.yml
+name: tests
+on: push
+
 jobs:
-  test:
+  build:
+    name: rspec
     runs-on: ubuntu-latest
+
     services:
-      db:
-        image: postgres:15.2
+      postgres:
+        image: postgres
         env:
-          POSTGRES_HOST: 127.0.0.1
-          POSTGRES_DB: auth
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: password
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
         ports:
           - 5432:5432
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
-
-    container:
-      image: ivankhoda/auth-app:latest
-      credentials:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+      redis:
+        image: redis
+        ports:
+          - 6379:6379
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: install PostgreSQL client
-        run: apt-get install libpq-dev
-      
-      - name: Set up Ruby 3.0.0
-        uses: actions/setup-ruby@v1
+      - uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.0.0
-
-      - name: Build and create DB
-        env:
-          # use localhost for the host here because we have specified a container for the job.
-          # If we were running the job on the VM this would be postgres
-          POSTGRES_HOST: 127.0.0.1
-          POSTGRES_USER: postgres
-          POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }} # get randomly assigned published port
-          POSTGRES_PASSWORD: password
-          RAILS_ENV: test
+          ruby-version: 3.0.3
+      - name: Install PostgreSQL
+        run: sudo apt-get -yqq install libpq-dev
+      - name: Run bundle install
         run: |
           gem install bundler
           bundle install --jobs 4 --retry 3
-          bundle exec rails db:create
-          bundle exec rails db:migrate
-          RAILS_ENV=test bundle exec rake
+      - name: Setup Database
+        env:
+          RAILS_ENV: test
+          POSTGRES_HOST: localhost
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        run: bin/rails db:create db:schema:load
 
-      - name: Run Rubocop
-        run: bundle exec rubocop -c .rubocopignorebuild.yml
-
-      - name: Run rspec
-        run: COVERAGE=true RAILS_ENV=test bundle exec parallel_rspec ./spec
-
-      - name: Stash Coverage Results
-        run: |
-          mkdir coverage_results
-          cp -R coverage/.resultset.json coverage_results/.resultset-0.json
-
-      - name: Run report_coverage
-        run: RAILS_ENV=test bundle exec rake simplecov:report_coverage
-
-      - name: Save coverage
-        uses: actions/upload-artifact@v3
-        if: success() || failure()
-        with:
-          name: coverage
-          path: ./coverage
+      - name: Build and test with rspec
+        env:
+          RAILS_ENV: test
+          POSTGRES_HOST: localhost
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        run: bundle exec rspec
