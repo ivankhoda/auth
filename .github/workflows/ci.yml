@@ -37,11 +37,12 @@ jobs:
       - name: PG is runing
         run: |
               ps -ef | grep postgres
-              systemctl status postgresql
 
       - name: run bundle install
         run: bundle install --jobs=8 --path vendor/bundle
-        
+      - name: Create DB
+        run: |
+             RAILS_ENV=test bundle exec rake parallel:create
 #      - name: Setup database
 #        env:
 #            PG_DATABASE: postgres
