@@ -19,17 +19,17 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
-#    services:
-#      db:
-#        image: postgres:15.2
-#        env:
-#          POSTGRES_HOST: localhost
-#          POSTGRES_USER: postgres
-#          POSTGRES_PASSWORD: postgres
-#          POSTGRES_DB: auth
-#        ports:
-#          - 5432:5432
-#        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+    services:
+      db:
+        image: postgres:15.2
+        env:
+          POSTGRES_HOST: db
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: auth
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
       - name: Checkout code
@@ -45,12 +45,11 @@ jobs:
         env:
           RAILS_ENV: test
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_HOST: localhost
+          POSTGRES_PASSWORD: password
+          POSTGRES_HOST: db
           POSTGRES_PORT: 5432
           POSTGRES_DB: auth
         run: |
-            cp config/database.yml.github-actions config/database.yml
             bundle exec rake db:create
             bundle exec rake db:schema:load
         
