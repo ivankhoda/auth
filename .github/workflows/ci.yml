@@ -13,22 +13,22 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-#    container:
-#      image: ivankhoda/auth-app:latest
-#      credentials:
-#        username: ${{ secrets.DOCKER_USERNAME }}
-#        password: ${{ secrets.DOCKER_PASSWORD }}
+    container:
+      image: ivankhoda/auth-app:latest
+      credentials:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
 
-    services:
-      db:
-        image: postgres:15.2
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: password
-          POSTGRES_DB: auth
-        ports:
-          - 5432:5432
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+#    services:
+#      db:
+#        image: postgres:15.2
+#        env:
+#          POSTGRES_USER: postgres
+#          POSTGRES_PASSWORD: password
+#          POSTGRES_DB: auth
+#        ports:
+#          - 5432:5432
+#        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
       - name: Checkout code
@@ -36,9 +36,6 @@ jobs:
 
       - name: install PostgreSQL client
         run: sudo apt-get install libpq-dev
-
-      - name: install Bundler
-        run: sudo gem install bundler
 
       - name: run bundle install
         run: bundle install --jobs=8 --path vendor/bundle
