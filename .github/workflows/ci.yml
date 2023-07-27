@@ -36,14 +36,19 @@ jobs:
 
       - name: install PostgreSQL client
         run: apt-get install libpq-dev
+
+      - name: run bundle install
+        run: bundle install --jobs=8 --path vendor/bundle
         
-      - name: Wait for PostgreSQL to be ready
+      - name: Setup Database
         run: |
-          until pg_isready -h localhost -p 5432; do
-            echo "PostgreSQL is not yet ready - waiting..."
-            sleep 5
-          done
-          echo "PostgreSQL is ready!"
+            cp config/database.yml.github-actions config/database.yml
+            bundle exec rake db:create
+            bundle exec rake db:schema:load
+        env:
+            RAILS_ENV: test
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
 
 #       - name: Build and create DB
 #         env:
@@ -57,8 +62,7 @@ jobs:
 #           bundle install --jobs 4 --retry 3
 #           bin/rails db:setup
 
-#       - name: run bundle install
-#         run: bundle install --jobs=8 --path vendor/bundle
+#
 
 #       - name: Create DB
 #         run: |
