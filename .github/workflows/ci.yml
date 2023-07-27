@@ -49,6 +49,7 @@ jobs:
             RAILS_ENV: test
             POSTGRES_USER: postgres
             POSTGRES_PASSWORD: postgres
+            DATABASE_URL: postgres://postgres:@localhost:5432/github-actions
 
 #       - name: Build and create DB
 #         env:
