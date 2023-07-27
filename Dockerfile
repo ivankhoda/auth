@@ -1,4 +1,4 @@
-FROM ruby:3.0.0 AS auth_app
+FROM ruby:3.0.2 AS auth_app
 
 RUN apt-get update && apt-get install -y curl build-essential gnupg postgresql-client
 
