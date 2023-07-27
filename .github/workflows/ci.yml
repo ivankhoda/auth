@@ -14,7 +14,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     container:
-      image: ivankhoda/auth-app:latest
+      image: ivankhoda/auth_app:latest
       credentials:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
@@ -25,7 +25,7 @@ jobs:
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: password
-          POSTGRES_DB: auth_development
+          POSTGRES_DB: auth
         ports:
           - 5432:5432
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
@@ -44,9 +44,11 @@ jobs:
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: password
-          POSTGRES_DB: auth_development
+          POSTGRES_DB: auth
+          RAILS_ENV: test
         run: |
-             RAILS_ENV=test bundle exec rake parallel:create
+              cp config/database.yml.github-actions >> config/database.yml
+              bundle exec rake parallel:create
 #      - name: Setup database
 #        env:
 #            PG_DATABASE: postgres
