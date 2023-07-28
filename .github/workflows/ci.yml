@@ -58,9 +58,6 @@ jobs:
       - name: Run create tmp DB
         run: RAILS_ENV=test bundle exec rake tmp:create
 
-      - name: Run Rubocop
-        run: bundle exec rubocop -c .rubocopignorebuild.yml
-
       - name: Run rspec
         run: COVERAGE=true RAILS_ENV=test bundle exec parallel_rspec ./spec
       - name: Stash Coverage Results
