@@ -1,3 +1,5 @@
+require "rails_helper"
+
 describe Api::ItemsController, type: :controller do
   describe "#create" do
     let!(:user) { create(:user) }
