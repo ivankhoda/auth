@@ -1,9 +1,10 @@
+# frozen_string_literal=true
+
 class Items::ItemsController < ApplicationController
   before_action :authenticate_user!
   wrap_parameters :slot, include: [:code, :name, :slot_id]
 
   def create
-    pp(item_creation_params, "00000")
     @slot = Item.new(item_creation_params)
     if @slot.save
       render json: {slot: @slot}
