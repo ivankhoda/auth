@@ -26,6 +26,7 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_DB: auth
           POSTGRES_HOST_AUTH_METHOD: trust
+          POSTGRES_HOST: auth-db-1
         ports:
           - 5432:5432
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
@@ -42,6 +43,7 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_DB: auth
           POSTGRES_HOST_AUTH_METHOD: trust
+          POSTGRES_HOST: auth-db-1
           RAILS_ENV: test
         run: |
               cp config/database.yml.github-actions config/database.yml
