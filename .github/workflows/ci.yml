@@ -47,7 +47,38 @@ jobs:
           RAILS_ENV: test
         run: |
               cp config/database.yml.github-actions config/database.yml
-              bundle exec rake parallel:create
+              bundle exec rake db:create
+
+      - name: Run load from schema
+        run: RAILS_ENV=test bundle exec rake db:schema:load
+
+      - name: Run migrate DB
+        run: RAILS_ENV=test bundle exec rake db:migrate
+
+      - name: Run create tmp DB
+        run: RAILS_ENV=test bundle exec rake tmp:create
+
+      - name: Run Rubocop
+        run: bundle exec rubocop -c .rubocopignorebuild.yml
+
+      - name: Run rspec
+        run: COVERAGE=true RAILS_ENV=test bundle exec parallel_rspec ./spec
+      - name: Stash Coverage Results
+        run: |
+              mkdir coverage_results
+              cp -R coverage/.resultset.json coverage_results/.resultset-0.json
+
+      - name: Run report_coverage
+        run: RAILS_ENV=test bundle exec rake simplecov:report_coverage
+
+      - name: Save coverage
+        uses: actions/upload-artifact@v3
+        if: success() || failure()
+        with:
+          name: coverage
+          path: ./coverage
+
+
 #      - name: Setup database
 #        env:
 #            PG_DATABASE: postgres
