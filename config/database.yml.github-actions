@@ -1,6 +1,6 @@
 test:
   adapter: postgresql
-  host: db-1
+  host: db
   encoding: unicode
   database: auth_test
   pool: 20
