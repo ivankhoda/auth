@@ -67,13 +67,6 @@ jobs:
               mkdir coverage_results
               cp -R coverage/.resultset.json coverage_results/.resultset-0.json
 
-      - name: Upload coverage results
-        uses: actions/upload-artifact@master
-        if: always()
-        with:
-          name: coverage-report
-          path: coverage
-
       - name: Run report_coverage
         run: RAILS_ENV=test bundle exec rake simplecov:coverage_report
 
@@ -83,66 +76,3 @@ jobs:
         with:
           name: coverage
           path: ./coverage
-
-
-#      - name: Setup database
-#        env:
-#            PG_DATABASE: postgres
-#            PG_HOST: localhost
-#            PG_USER: postgres
-#            PG_PASSWORD: password
-#            RAILS_ENV: test
-#            WITH_COVERAGE: true
-#            DISABLE_SPRING: 1
-#        run: |
-#            RAILS_ENV=test bundle exec rake parallel:create
-        
-
-#       - name: Build and create DB
-#         env:
-#           POSTGRES_HOST: 127.0.0.1
-#           POSTGRES_USER: postgres
-#           POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }} # get randomly assigned published port
-#           POSTGRES_PASSWORD: password
-#           RAILS_ENV: test
-#         run: |
-#           gem install bundler
-#           bundle install --jobs 4 --retry 3
-#           bin/rails db:setup
-
-#
-
-#       - name: Create DB
-#         run: |
-#           RAILS_ENV=test bundle exec rake parallel:create
-
-
-#       - name: Run load from schema
-#         run: RAILS_ENV=test bundle exec rake parallel:rake[db:schema:load]
-
-#       - name: Run migrate DB
-#         run: RAILS_ENV=test bundle exec rake parallel:migrate
-
-#       - name: Run create tmp DB
-#         run: RAILS_ENV=test bundle exec rake tmp:create
-
-#       - name: Run Rubocop
-#         run: bundle exec rubocop -c .rubocopignorebuild.yml
-
-#       - name: Run rspec
-#         run: COVERAGE=true RAILS_ENV=test bundle exec parallel_rspec ./spec
-
-#       - name: Stash Coverage Results
-#         run: |
-#           mkdir coverage_results
-#           cp -R coverage/.resultset.json coverage_results/.resultset-0.json
-
-#       - name: Run report_coverage
-#         run: RAILS_ENV=test bundle exec rake simplecov:report_coverage
-
-#       - name: Save coverage
-#         uses: actions/upload-artifact@v3
-#         if: success() || failure()
-#         with:
-#           name: coverage
-#           path: ./coverage
