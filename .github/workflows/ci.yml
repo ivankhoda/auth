@@ -60,7 +60,7 @@ jobs:
 
       - name: Run rspec
         run: |
-              RAILS_ENV=test rails generate rspec:install
+              RAILS_ENV=test bundle exec rake rspec:install
               COVERAGE=true RAILS_ENV=test bundle exec rspec ./spec
       - name: Stash Coverage Results
         run: |
