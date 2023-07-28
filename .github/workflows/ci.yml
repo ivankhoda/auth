@@ -23,7 +23,7 @@ jobs:
       db:
         image: postgres:15.2
         env:
-          POSTGRES_USER: postgres
+          POSTGRES_USER: root
           POSTGRES_DB: auth
           POSTGRES_HOST_AUTH_METHOD: trust
           POSTGRES_HOST: db
