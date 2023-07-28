@@ -61,13 +61,21 @@ jobs:
       - name: Run rspec
         run: |
               COVERAGE=true RAILS_ENV=test bundle exec rspec ./spec
+
       - name: Stash Coverage Results
         run: |
               mkdir coverage_results
               cp -R coverage/.resultset.json coverage_results/.resultset-0.json
 
+      - name: Upload coverage results
+        uses: actions/upload-artifact@master
+        if: always()
+        with:
+          name: coverage-report
+          path: coverage
+
       - name: Run report_coverage
-        run: RAILS_ENV=test bundle exec rake simplecov:report_coverage
+        run: RAILS_ENV=test bundle exec rake simplecov:coverage_report
 
       - name: Save coverage
         uses: actions/upload-artifact@v3
