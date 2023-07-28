@@ -59,7 +59,9 @@ jobs:
         run: RAILS_ENV=test bundle exec rake tmp:create
 
       - name: Run rspec
-        run: COVERAGE=true RAILS_ENV=test bundle exec rspec ./spec
+        run: |
+              rails generate rspec:install
+              COVERAGE=true RAILS_ENV=test bundle exec rspec ./spec
       - name: Stash Coverage Results
         run: |
               mkdir coverage_results
