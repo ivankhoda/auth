@@ -59,7 +59,6 @@ group :development, :test do
   gem "rspec-rails"
   gem "byebug", platform: :mri
   gem "warden-jwt_auth"
-  gem "will_paginate"
   gem "parallel_tests"
   gem "parallel_rspec", "~> 0.3.1"
   gem "capybara"
