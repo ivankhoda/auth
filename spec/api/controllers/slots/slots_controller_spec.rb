@@ -7,8 +7,12 @@ describe Api::SlotsController, type: :controller do
     before { sign_in user }
 
     subject { post :create, params: {code: "A1", name: "test"}, format: :json }
-    it { is_expected.to have_http_status(:ok) }
-    it { expect { subject }.to change(Slot, :count).by(1) }
+    it do
+      expect do
+        is_expected.to have_http_status(:ok)
+      end.to(change(Slot, :count).by(1))
+    end
+
     it do
       travel(0) do
         subject
