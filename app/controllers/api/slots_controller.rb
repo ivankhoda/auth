@@ -66,7 +66,7 @@ module Api
     end
 
     def slot_creation_params
-      slot_params.merge({user: current_user})
+      slot_params.merge!({user: current_user}) if current_user.present?
     end
 
     def slot_update_params

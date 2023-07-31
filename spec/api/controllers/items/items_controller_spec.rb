@@ -8,12 +8,17 @@ describe Api::ItemsController, type: :controller do
     before { sign_in user }
 
     subject { post :create, params: {code: "A1", name: "test", slot_code: slot.code}, format: :json }
-    it { is_expected.to have_http_status(:ok) }
-    it { expect { subject }.to change(Item, :count).by(1) }
+
+    it do
+      expect do
+        is_expected.to have_http_status(:ok)
+      end.to(change(Item, :count).by(1))
+    end
+
     it do
       travel(0) do
         subject
-        expect(response.body).to eq({id: 3,
+        expect(response.body).to eq({id: 2,
                                      code: "A1",
                                      name: "test",
                                      user_id: user.id,
